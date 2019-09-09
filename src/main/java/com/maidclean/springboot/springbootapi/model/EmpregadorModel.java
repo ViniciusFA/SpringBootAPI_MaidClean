@@ -1,5 +1,7 @@
 package com.maidclean.springboot.springbootapi.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,31 +11,49 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_empregadores")
-public class EmpregadorModel {
+public class EmpregadorModel implements Serializable{
 
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id_empregador")
 	private int id;
-	private int cpf;
+	@Column(name="cpf")
+	private String cpf;
+	@Column(name="ds_nome")
 	private String nome;
+	@Column(name="ds_sobrenome")
 	private String sobrenome;
+	@Column(name="ds_login")
 	private String login;
+	@Column(name="ds_senha")
 	private String senha;
+	@Column(name="ds_email")
 	private String email;
+	@Column(name="ds_facebook")
 	private String url_facebook;
+	@Column(name="haswhatsapp")
 	private boolean hasWhatsapp;
-	private int telefone;
+	@Column(name="telefone")
+	private String telefone;
+	@Column(name="residencia")
 	private String residencia;
+	@Column(name="ds_endereco")
 	private String endereco;
+	@Column(name="ds_complemento")
 	private String complemento;
+	@Column(name="nm_cidade")
 	private String cidade;
+	@Column(name="vl_estado")
 	private int estado;
+	@Column(name="cep")
 	private int cep;
+	@Column(name="vl_sexo")
 	private boolean isMale;
 	
 	public EmpregadorModel() {}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_empregador")
+	
 	public int getId() {
 		return id;
 	}
@@ -41,17 +61,15 @@ public class EmpregadorModel {
 	public void setId(int id_empregador) {
 		this.id = id_empregador;
 	}
-
-	@Column(name="cpf")
-	public int getCpf() {
+	
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	@Column(name="ds_nome")
+	
 	public String getNome() {
 		return nome;
 	}
@@ -59,8 +77,7 @@ public class EmpregadorModel {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@Column(name="ds_sobrenome")
+	
 	public String getSobrenome() {
 		return sobrenome;
 	}
@@ -68,8 +85,7 @@ public class EmpregadorModel {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-
-	@Column(name="ds_login")
+	
 	public String getLogin() {
 		return login;
 	}
@@ -77,17 +93,15 @@ public class EmpregadorModel {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
-	@Column(name="ds_senha")
+	
 	public String getSenha() {
 		return senha;
 	}
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
+	}	
 	
-	@Column(name="ds_email")
 	public String getEmail() {
 		return email;
 	}
@@ -95,8 +109,7 @@ public class EmpregadorModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	@Column(name="ds_facebook")
+	
 	public String getUrl_facebook() {
 		return url_facebook;
 	}
@@ -104,8 +117,7 @@ public class EmpregadorModel {
 	public void setUrl_facebook(String url_facebook) {
 		this.url_facebook = url_facebook;
 	}
-
-	@Column(name="haswhatsapp")
+	
 	public boolean isHasWhatsapp() {
 		return hasWhatsapp;
 	}
@@ -113,17 +125,23 @@ public class EmpregadorModel {
 	public void setHasWhatsapp(boolean hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
-
-	@Column(name="telefone")
-	public int getTelefone() {
+	
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+	
+	public String getResidencia() {
+		return residencia;
+	}
 
-	@Column(name="ds_endereco")
+	public void setResidencia(String residencia) {
+		this.residencia = residencia;
+	}
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -131,8 +149,7 @@ public class EmpregadorModel {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	@Column(name="ds_complemento")
+	
 	public String getComplemento() {
 		return complemento;
 	}
@@ -140,8 +157,7 @@ public class EmpregadorModel {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-
-	@Column(name="nm_cidade")
+	
 	public String getCidade() {
 		return cidade;
 	}
@@ -149,8 +165,7 @@ public class EmpregadorModel {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
-	@Column(name="vl_estado")
+	
 	public int getEstado() {
 		return estado;
 	}
@@ -158,8 +173,7 @@ public class EmpregadorModel {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-
-	@Column(name="cep")
+	
 	public int getCep() {
 		return cep;
 	}
@@ -167,9 +181,7 @@ public class EmpregadorModel {
 	public void setCep(int cep) {
 		this.cep = cep;
 	}
-
-
-	@Column(name="vl_sexo")
+	
 	public boolean isMale() {
 		return isMale;
 	}
@@ -184,7 +196,6 @@ public class EmpregadorModel {
 				+ url_facebook + ", hasWhatsapp=" + hasWhatsapp + ", telefone=" + telefone + ", residencia="
 				+ residencia + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
 				+ ", estado=" + estado + ", cep=" + cep + ", isMale=" + isMale + "]";
-	}
-	
+	}	
 	
 }

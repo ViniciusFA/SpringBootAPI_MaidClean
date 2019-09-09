@@ -7,7 +7,7 @@ import org.springframework.data.repository.Repository;
 
 import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
 
-public interface FuncionarioRepository extends Repository<FuncionarioModel, Long>{
+public interface FuncionarioRepository extends Repository<FuncionarioModel, Integer>{
 
 	void save(FuncionarioModel pessoa);
 	 

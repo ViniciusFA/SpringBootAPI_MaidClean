@@ -14,45 +14,45 @@ import javax.persistence.Table;
 public class FuncionarioModel implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_funcionario")
-	private int id;	
-	@Column(name="cpf")
-	private String cpf;	
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
+	private int id;		
 	@Column(name="ds_nome")
 	private String nome;	
-	@Column(name="ds_sobrenome")
-	private String sobrenome;	
+	@Column(name="ds_cpf")
+	private String cpf;			
 	@Column(name="ds_login")
 	private String login;	
-	@Column(name="ds_senha")
+	@Column(name="ds_senha")	
 	private String senha;	
 	@Column(name="ds_email")
 	private String email;	
 	@Column(name="ds_facebook")
 	private String url_facebook;	
-	@Column(name="haswhatsapp")
+	@Column(name="vl_haswhatsapp")
 	private boolean hasWhatsapp;	
-	@Column(name="telefone")
+	@Column(name="ds_telefone")
 	private String telefone;	
-	@Column(name="profissao")
+	@Column(name="ds_profissao")	
 	private String profissao;	
-	@Column(name="experiencia")
-	private String experiencia;	
+	@Column(name="ds_experiencia")
+	private String experiencia;		
 	@Column(name="ds_endereco")
 	private String endereco;	
 	@Column(name="ds_complemento")
 	private String complemento;	
-	@Column(name="nm_cidade")
-	private String cidade;	
+	@Column(name="ds_cidade")
+	private String cidade;		
 	@Column(name="vl_estado")
 	private int estado;	
-	@Column(name="cep")
+	@Column(name="ds_cep")
 	private int cep;	
 	@Column(name="vl_avaliacao")
 	private int avaliacao;	
 	@Column(name="vl_sexo")
 	private boolean isMale;
+	@Column(name="ds_sobrenome")
+	private String sobrenome;
 	
 	public FuncionarioModel() {}
 

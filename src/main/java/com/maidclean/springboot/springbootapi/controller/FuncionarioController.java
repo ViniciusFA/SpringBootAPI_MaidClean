@@ -1,5 +1,7 @@
 package com.maidclean.springboot.springbootapi.controller;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,8 @@ public class FuncionarioController {
 	 * @param funcionario
 	 * @return
 	 */
-	@RequestMapping(value="/funcionario", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE, 
-			produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value="/funcionario", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
+			, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody ResponseModel save(@RequestBody FuncionarioModel funcionario) {
 		
 		try {
@@ -38,9 +40,10 @@ public class FuncionarioController {
 			
 			return new ResponseModel(1, "Registro salvo com sucesso.");
 			
-		}catch(Exception e) {			
-			return new ResponseModel(0, e.getMessage());
+		}catch(Exception e) {				
+			return new ResponseModel(0, e.getMessage() );
 		}
+		
 	}
 	
 	/**
@@ -64,8 +67,7 @@ public class FuncionarioController {
 	 * @return
 	 */	
 	@RequestMapping(value="/funcionario", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody  List<FuncionarioModel> consultar(){
-		
+	public @ResponseBody  List<FuncionarioModel> consultar(){	
 		
 		
 		return this.funcionarioRepository.findAll();		
@@ -76,7 +78,7 @@ public class FuncionarioController {
 	 * @param codigo
 	 * @return
 	 */
-	@RequestMapping(value = "/funcionario/{codigo}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody FuncionarioModel buscar(@PathVariable("id_funcionario") Integer id_funcionario) {
 		
 		
@@ -89,8 +91,8 @@ public class FuncionarioController {
 	 * @param codigo
 	 * @return
 	 */
-	@RequestMapping(value="/funcionario/{codigo}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel excluir(@PathVariable("codigo") Integer id_funcionario) {
+	@RequestMapping(value="/funcionario/{id_funcionario}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody ResponseModel excluir(@PathVariable("id_funcionario") Integer id_funcionario) {
 		
 		FuncionarioModel funcionario = funcionarioRepository.findById(id_funcionario);
 		

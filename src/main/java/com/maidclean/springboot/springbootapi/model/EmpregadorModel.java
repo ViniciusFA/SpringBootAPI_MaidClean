@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "tb_empregadores")
 public class EmpregadorModel implements Serializable{
 	
+	private static final long serialVersionUID = 5408753583413586310L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_empregador")	

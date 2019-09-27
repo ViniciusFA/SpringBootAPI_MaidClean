@@ -2,6 +2,7 @@ package com.maidclean.springboot.springbootapi.irepository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
 import com.maidclean.springboot.springbootapi.model.EmpregadorModel;
@@ -15,7 +16,6 @@ public interface IEmpregadorRepository extends Repository<EmpregadorModel, Long>
  
 	List<EmpregadorModel> findAll();
  
-	EmpregadorModel findById(Integer id);
-	
-	
-}
+	EmpregadorModel findById(Integer id);                   
+}                                                          
+                                                           

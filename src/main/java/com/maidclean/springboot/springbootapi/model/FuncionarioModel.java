@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name = "tb_funcionarios")
 public class FuncionarioModel implements Serializable{
 
+	private static final long serialVersionUID = 4770619631728341970L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")

@@ -31,7 +31,7 @@ public class EmpregadorController {
 	
 	/**
 	 * SALVAR UM NOVO REGISTRO
-	 * @param funcionario
+	 * @param empregado
 	 * @return
 	 */
 	@RequestMapping(value="/empregador", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
@@ -49,7 +49,7 @@ public class EmpregadorController {
 
 	/**
 	 * ATUALIZAR O REGISTRO DE UMA PESSOA
-	 * @param funcionario
+	 * @param empregado
 	 * @return
 	 */
 	@RequestMapping(value="empregador", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE )

@@ -12,43 +12,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_empregadores")
 public class EmpregadorModel implements Serializable{
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_empregador")
-	private int id;
-	@Column(name="cpf")
-	private String cpf;
-	@Column(name="ds_nome")
-	private String nome;
-	@Column(name="ds_sobrenome")
-	private String sobrenome;
-	@Column(name="ds_login")
-	private String login;
-	@Column(name="ds_senha")
-	private String senha;
-	@Column(name="ds_email")
-	private String email;
-	@Column(name="ds_facebook")
-	private String url_facebook;
-	@Column(name="haswhatsapp")
-	private boolean hasWhatsapp;
-	@Column(name="telefone")
-	private String telefone;
-	@Column(name="residencia")
-	private String residencia;
-	@Column(name="ds_endereco")
-	private String endereco;
-	@Column(name="ds_complemento")
-	private String complemento;
-	@Column(name="nm_cidade")
-	private String cidade;
-	@Column(name="vl_estado")
-	private int estado;
-	@Column(name="cep")
-	private int cep;
-	@Column(name="vl_sexo")
+	@Column(name="id_empregador")	
+	private int id;	
+	@Column(name="cpf")	
+	private Long cpf;	
+	@Column(name="ds_nome")	
+	private String nome;	
+	@Column(name="ds_sobrenome")	
+	private String sobrenome;	
+	@Column(name="ds_login")	
+	private String login;	
+	@Column(name="ds_senha")	
+	private String senha;	
+	@Column(name="ds_email")	
+	private String email;	
+	@Column(name="ds_facebook")	
+	private String url_facebook;	
+	@Column(name="haswhatsapp")	
+	private boolean hasWhatsapp;	
+	@Column(name="telefone")	
+	private Long telefone;	
+	@Column(name="residencia")	
+	private String residencia;	
+	@Column(name="ds_endereco")	
+	private String endereco;	
+	@Column(name="ds_complemento")	
+	private String complemento;	
+	@Column(name="nm_cidade")	
+	private String cidade;	
+	@Column(name="vl_estado")	
+	private int estado;	
+	@Column(name="cep")	
+	private Long cep;	
+	@Column(name="vl_sexo")	
 	private boolean isMale;
 	
 	public EmpregadorModel() {}
@@ -62,11 +61,11 @@ public class EmpregadorModel implements Serializable{
 		this.id = id_empregador;
 	}
 	
-	public String getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 	
@@ -126,11 +125,11 @@ public class EmpregadorModel implements Serializable{
 		this.hasWhatsapp = hasWhatsapp;
 	}
 	
-	public String getTelefone() {
+	public Long getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
+	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
 	
@@ -174,11 +173,11 @@ public class EmpregadorModel implements Serializable{
 		this.estado = estado;
 	}
 	
-	public int getCep() {
+	public Long getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(Long cep) {
 		this.cep = cep;
 	}
 	

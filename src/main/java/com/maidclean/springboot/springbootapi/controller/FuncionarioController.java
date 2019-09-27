@@ -1,7 +1,5 @@
 package com.maidclean.springboot.springbootapi.controller;
 
-import java.sql.SQLDataException;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maidclean.springboot.springbootapi.irepository.IFuncionarioRepository;
 import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
 import com.maidclean.springboot.springbootapi.model.ResponseModel;
-import com.maidclean.springboot.springbootapi.repository.FuncionarioRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -24,7 +22,13 @@ import com.maidclean.springboot.springbootapi.repository.FuncionarioRepository;
 public class FuncionarioController {
 
 	@Autowired
-	private FuncionarioRepository funcionarioRepository;
+	private IFuncionarioRepository funcionarioRepository;
+	
+	public FuncionarioController(IFuncionarioRepository funcionarioRepository) {
+		super();
+		this.funcionarioRepository = funcionarioRepository;
+	}
+
 	
 	/**
 	 * SALVAR UM NOVO REGISTRO
@@ -80,9 +84,7 @@ public class FuncionarioController {
 	 */
 	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody FuncionarioModel buscar(@PathVariable("id_funcionario") Integer id_funcionario) {
-		
-		
-		
+				
 		return this.funcionarioRepository.findById(id_funcionario);
 	}
 	

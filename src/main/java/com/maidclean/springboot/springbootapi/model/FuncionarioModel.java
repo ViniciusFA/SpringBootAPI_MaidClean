@@ -32,7 +32,7 @@ public class FuncionarioModel implements Serializable{
 	@Column(name="ds_facebook")
 	private String url_facebook;	
 	@Column(name="vl_haswhatsapp")
-	private boolean hasWhatsapp;	
+	private String hasWhatsapp;	
 	@Column(name="ds_telefone")
 	private String telefone;	
 	@Column(name="ds_profissao")	
@@ -46,13 +46,13 @@ public class FuncionarioModel implements Serializable{
 	@Column(name="ds_cidade")
 	private String cidade;		
 	@Column(name="vl_estado")
-	private int estado;	
+	private String estado;	
 	@Column(name="ds_cep")
-	private int cep;	
+	private String cep;	
 	@Column(name="vl_avaliacao")
-	private int avaliacao;	
+	private String avaliacao;	
 	@Column(name="vl_sexo")
-	private boolean isMale;
+	private String isMale;
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
@@ -123,11 +123,11 @@ public class FuncionarioModel implements Serializable{
 		this.url_facebook = url_facebook;
 	}
 	
-	public boolean isHasWhatsapp() {
+	public String isHasWhatsapp() {
 		return hasWhatsapp;
 	}
 
-	public void setHasWhatsapp(boolean hasWhatsapp) {
+	public void setHasWhatsapp(String hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
 	
@@ -179,35 +179,35 @@ public class FuncionarioModel implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 	
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 	
-	public int getAvaliacao() {
+	public String getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(int avaliacao) {
+	public void setAvaliacao(String avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 	
-	public boolean isMale() {
+	public String isMale() {
 		return isMale;
 	}
 
-	public void setMale(boolean isMale) {
+	public void setMale(String isMale) {
 		this.isMale = isMale;
 	}
 

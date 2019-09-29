@@ -34,9 +34,9 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="ds_facebook")	
 	private String url_facebook;	
 	@Column(name="haswhatsapp")	
-	private boolean hasWhatsapp;	
+	private String hasWhatsapp;	
 	@Column(name="telefone")	
-	private Long telefone;	
+	private String telefone;	
 	@Column(name="residencia")	
 	private String residencia;	
 	@Column(name="ds_endereco")	
@@ -46,11 +46,11 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="nm_cidade")	
 	private String cidade;	
 	@Column(name="vl_estado")	
-	private int estado;	
+	private String estado;	
 	@Column(name="cep")	
-	private Long cep;	
+	private String cep;	
 	@Column(name="vl_sexo")	
-	private boolean isMale;
+	private String isMale;
 	
 	public EmpregadorModel() {}
 
@@ -119,19 +119,19 @@ public class EmpregadorModel implements Serializable{
 		this.url_facebook = url_facebook;
 	}
 	
-	public boolean isHasWhatsapp() {
+	public String isHasWhatsapp() {
 		return hasWhatsapp;
 	}
 
-	public void setHasWhatsapp(boolean hasWhatsapp) {
+	public void setHasWhatsapp(String hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
 	
-	public Long getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Long telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
@@ -167,27 +167,27 @@ public class EmpregadorModel implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 	
-	public Long getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Long cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 	
-	public boolean isMale() {
+	public String isMale() {
 		return isMale;
 	}
 
-	public void setMale(boolean isMale) {
+	public void setMale(String isMale) {
 		this.isMale = isMale;
 	}
 	@Override

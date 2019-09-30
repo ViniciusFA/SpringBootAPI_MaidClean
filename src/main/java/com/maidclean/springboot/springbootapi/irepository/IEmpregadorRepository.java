@@ -16,6 +16,6 @@ public interface IEmpregadorRepository extends Repository<EmpregadorModel, Long>
  
 	List<EmpregadorModel> findAll();
  
-	EmpregadorModel findById(Integer id);                   
+	EmpregadorModel findById(Integer id);                  
 }                                                          
                                                            

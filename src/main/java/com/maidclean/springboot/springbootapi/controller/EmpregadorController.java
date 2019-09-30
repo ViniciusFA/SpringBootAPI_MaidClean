@@ -2,6 +2,7 @@ package com.maidclean.springboot.springbootapi.controller;
 
 import java.util.List;
 
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maidclean.springboot.springbootapi.irepository.IEmpregadorRepository;
 import com.maidclean.springboot.springbootapi.model.EmpregadorModel;
 import com.maidclean.springboot.springbootapi.model.ResponseModel;
@@ -37,9 +39,8 @@ public class EmpregadorController {
 	@RequestMapping(value="/empregador", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
 			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody ResponseModel save(@RequestBody EmpregadorModel empregador) {
-		try {
-			this.empregadorRepository.save(empregador);
-			
+		try {				
+			this.empregadorRepository.save(empregador);			
 			return new ResponseModel(1, "Registro salvo com sucesso.");
 		}catch(Exception e) {
 			

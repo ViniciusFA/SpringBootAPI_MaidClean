@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Entity
 @Table(name = "tb_empregadores")
 public class EmpregadorModel implements Serializable{
@@ -20,7 +22,7 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="id_empregador")	
 	private int id;	
 	@Column(name="cpf")	
-	private Long cpf;	
+	private int cpf;	
 	@Column(name="ds_nome")	
 	private String nome;	
 	@Column(name="ds_sobrenome")	
@@ -34,9 +36,9 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="ds_facebook")	
 	private String url_facebook;	
 	@Column(name="haswhatsapp")	
-	private String hasWhatsapp;	
+	private boolean hasWhatsapp;	
 	@Column(name="telefone")	
-	private String telefone;	
+	private int telefone;	
 	@Column(name="residencia")	
 	private String residencia;	
 	@Column(name="ds_endereco")	
@@ -46,11 +48,11 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="nm_cidade")	
 	private String cidade;	
 	@Column(name="vl_estado")	
-	private String estado;	
+	private int estado;	
 	@Column(name="cep")	
-	private String cep;	
+	private int cep;	
 	@Column(name="vl_sexo")	
-	private String isMale;
+	private boolean isMale;
 	
 	public EmpregadorModel() {}
 
@@ -63,11 +65,11 @@ public class EmpregadorModel implements Serializable{
 		this.id = id_empregador;
 	}
 	
-	public Long getCpf() {
+	public int getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(int cpf) {
 		this.cpf = cpf;
 	}
 	
@@ -119,19 +121,19 @@ public class EmpregadorModel implements Serializable{
 		this.url_facebook = url_facebook;
 	}
 	
-	public String isHasWhatsapp() {
+	public boolean isHasWhatsapp() {
 		return hasWhatsapp;
 	}
 
-	public void setHasWhatsapp(String hasWhatsapp) {
+	public void setHasWhatsapp(boolean hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
 	
-	public String getTelefone() {
+	public int getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
+	public void setTelefone(int telefone) {
 		this.telefone = telefone;
 	}
 	
@@ -167,29 +169,30 @@ public class EmpregadorModel implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 	
-	public String getCep() {
+	public int getCep() {
 		return cep;
 	}
 
-	public void setCep(String cep) {
+	public void setCep(int cep) {
 		this.cep = cep;
 	}
 	
-	public String isMale() {
+	public boolean isMale() {
 		return isMale;
 	}
 
-	public void setMale(String isMale) {
+	public void setMale(boolean isMale) {
 		this.isMale = isMale;
 	}
+		
 	@Override
 	public String toString() {
 		return "EmpregadorModel [id_empregador=" + id + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome="

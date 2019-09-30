@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.repository.Repository;
 
 import com.maidclean.springboot.springbootapi.model.ContatoModel;
-import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
 
 public interface IContatoRepository extends Repository<ContatoModel, Long>{
 

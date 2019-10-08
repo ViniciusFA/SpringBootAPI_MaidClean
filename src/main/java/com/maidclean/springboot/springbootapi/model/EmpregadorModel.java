@@ -22,7 +22,7 @@ public class EmpregadorModel implements Serializable{
 	@Column(name="id_empregador")	
 	private int id;	
 	@Column(name="cpf")	
-	private int cpf;	
+	private Long cpf;	
 	@Column(name="ds_nome")	
 	private String nome;	
 	@Column(name="ds_sobrenome")	
@@ -65,11 +65,11 @@ public class EmpregadorModel implements Serializable{
 		this.id = id_empregador;
 	}
 	
-	public int getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 	

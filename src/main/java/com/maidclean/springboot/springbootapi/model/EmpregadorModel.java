@@ -20,19 +20,19 @@ public class EmpregadorModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_empregador")	
-	private int id;	
+	private UsuarioModel id;	
 	@Column(name="cpf")	
 	private Long cpf;	
 	@Column(name="ds_nome")	
-	private String nome;	
+	private UsuarioModel nome;	
 	@Column(name="ds_sobrenome")	
 	private String sobrenome;	
 	@Column(name="ds_login")	
-	private String login;	
+	private UsuarioModel login;	
 	@Column(name="ds_senha")	
 	private String senha;	
 	@Column(name="ds_email")	
-	private String email;	
+	private UsuarioModel email;	
 	@Column(name="ds_facebook")	
 	private String url_facebook;	
 	@Column(name="haswhatsapp")	
@@ -57,12 +57,8 @@ public class EmpregadorModel implements Serializable{
 	public EmpregadorModel() {}
 
 	
-	public int getId() {
+	public UsuarioModel getId() {
 		return id;
-	}
-
-	public void setId(int id_empregador) {
-		this.id = id_empregador;
 	}
 	
 	public Long getCpf() {
@@ -73,11 +69,11 @@ public class EmpregadorModel implements Serializable{
 		this.cpf = cpf;
 	}
 	
-	public String getNome() {
+	public UsuarioModel getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(UsuarioModel nome) {
 		this.nome = nome;
 	}
 	
@@ -89,11 +85,11 @@ public class EmpregadorModel implements Serializable{
 		this.sobrenome = sobrenome;
 	}
 	
-	public String getLogin() {
+	public UsuarioModel getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public void setLogin(UsuarioModel login) {
 		this.login = login;
 	}
 	
@@ -105,11 +101,11 @@ public class EmpregadorModel implements Serializable{
 		this.senha = senha;
 	}	
 	
-	public String getEmail() {
+	public UsuarioModel getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(UsuarioModel email) {
 		this.email = email;
 	}
 	

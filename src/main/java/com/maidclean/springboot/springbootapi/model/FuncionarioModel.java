@@ -2,12 +2,17 @@ package com.maidclean.springboot.springbootapi.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "tb_funcionarios")
@@ -17,56 +22,73 @@ public class FuncionarioModel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
-	private int id;		
-	@Column(name="ds_nome")
-	private String nome;	
+	@JoinColumn(name="id")
+	private Long id;
+	
+	@OneToOne(cascade = {})
+	@JoinColumn(name="ds_nome")
+	private UsuarioModel nome;	
+	
 	@Column(name="ds_cpf")
-	private String cpf;			
-	@Column(name="ds_login")
-	private String login;	
+	private String cpf;		
+	
+	@OneToOne
+	@JoinColumn(name="ds_login")
+	private UsuarioModel login;	
+	
 	@Column(name="ds_senha")	
 	private String senha;	
-	@Column(name="ds_email")
-	private String email;	
+	
+	@OneToOne
+	@JoinColumn(name="ds_email")
+	private UsuarioModel email;	
+	
 	@Column(name="ds_facebook")
-	private String url_facebook;	
+	private String url_facebook;
+	
 	@Column(name="vl_haswhatsapp")
 	private String hasWhatsapp;	
+	
 	@Column(name="ds_telefone")
 	private String telefone;	
+	
 	@Column(name="ds_profissao")	
 	private String profissao;	
+	
 	@Column(name="ds_experiencia")
 	private String experiencia;		
+	
 	@Column(name="ds_endereco")
 	private String endereco;	
+	
 	@Column(name="ds_complemento")
 	private String complemento;	
+	
 	@Column(name="ds_cidade")
 	private String cidade;		
+	
 	@Column(name="vl_estado")
 	private String estado;	
+	
 	@Column(name="ds_cep")
 	private String cep;	
+	
 	@Column(name="vl_avaliacao")
 	private String avaliacao;	
+	
 	@Column(name="vl_sexo")
 	private String isMale;
+	
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
 	public FuncionarioModel() {}
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	
-	public void setId(int id_funcionario) {
-		this.id = id_funcionario;
-	}
-	
+		
 	public String getCpf() {
 		return cpf;
 	}
@@ -75,11 +97,11 @@ public class FuncionarioModel implements Serializable{
 		this.cpf = cpf;
 	}
 	
-	public String getNome() {
+	public UsuarioModel getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(UsuarioModel nome) {
 		this.nome = nome;
 	}
 	
@@ -91,11 +113,11 @@ public class FuncionarioModel implements Serializable{
 		this.sobrenome = sobrenome;
 	}
 	
-	public String getLogin() {
+	public UsuarioModel getLogin() {
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public void setLogin(UsuarioModel login) {
 		this.login = login;
 	}
 	
@@ -107,11 +129,11 @@ public class FuncionarioModel implements Serializable{
 		this.senha = senha;
 	}	
 	
-	public String getEmail() {
+	public UsuarioModel getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(UsuarioModel email) {
 		this.email = email;
 	}
 	

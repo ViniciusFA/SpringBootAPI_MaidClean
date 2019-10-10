@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IFuncionarioRepository;
-import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
-import com.maidclean.springboot.springbootapi.model.ResponseModel;
+import com.maidclean.springboot.springbootapi.model.Funcionario;
+import com.maidclean.springboot.springbootapi.model.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -37,15 +37,15 @@ public class FuncionarioController {
 	 */
 	@RequestMapping(value="/funcionario", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
 			, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel save(@RequestBody FuncionarioModel funcionario) {
+	public @ResponseBody Response save(@RequestBody Funcionario funcionario) {
 		
 		try {
 			this.funcionarioRepository.save(funcionario);
 			
-			return new ResponseModel(1, "Registro salvo com sucesso.");
+			return new Response(1, "Registro salvo com sucesso.");
 			
 		}catch(Exception e) {				
-			return new ResponseModel(0, e.getMessage() );
+			return new Response(0, e.getMessage() );
 		}
 		
 	}
@@ -56,13 +56,13 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping(value="/funcionario", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel atualizar(@RequestBody FuncionarioModel funcionario) {
+	public @ResponseBody Response atualizar(@RequestBody Funcionario funcionario) {
 		try {
 			this.funcionarioRepository.save(funcionario);
 			
-			return new ResponseModel(1, "Registro atualizado com sucesso.");
+			return new Response(1, "Registro atualizado com sucesso.");
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class FuncionarioController {
 	 * @return
 	 */	
 	@RequestMapping(value="/funcionario", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody  List<FuncionarioModel> consultar(){	
+	public @ResponseBody  List<Funcionario> consultar(){	
 		
 		
 		return this.funcionarioRepository.findAll();		
@@ -83,7 +83,7 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody FuncionarioModel buscar(@PathVariable("id_funcionario") Integer id_funcionario) {
+	public @ResponseBody Funcionario buscar(@PathVariable("id_funcionario") Integer id_funcionario) {
 				
 		return this.funcionarioRepository.findById(id_funcionario);
 	}
@@ -94,17 +94,17 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping(value="/funcionario/{id_funcionario}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel excluir(@PathVariable("id_funcionario") Integer id_funcionario) {
+	public @ResponseBody Response excluir(@PathVariable("id_funcionario") Integer id_funcionario) {
 		
-		FuncionarioModel funcionario = funcionarioRepository.findById(id_funcionario);
+		Funcionario funcionario = funcionarioRepository.findById(id_funcionario);
 		
 		try {
 			funcionarioRepository.delete(funcionario);
 			
-			return new ResponseModel(1, "Registro excluído com sucesso.");
+			return new Response(1, "Registro excluído com sucesso.");
 			
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 	}
 	

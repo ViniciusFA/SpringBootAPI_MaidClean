@@ -1,13 +1,13 @@
 package com.maidclean.springboot.springbootapi.model;
 
-public class ResponseModel {
+public class Response {
 
 	private int codigo;
 	private String mensagem;
  
-	public ResponseModel() {}
+	public Response() {}
  
-	public ResponseModel(int codigo, String mensagem) {
+	public Response(int codigo, String mensagem) {
 		this.codigo   = codigo;
 		this.mensagem =  mensagem;
 	}

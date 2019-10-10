@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
-import com.maidclean.springboot.springbootapi.model.EmpregadorModel;
-import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
+import com.maidclean.springboot.springbootapi.model.Empregador;
+import com.maidclean.springboot.springbootapi.model.Funcionario;
 
-public interface IEmpregadorRepository extends Repository<EmpregadorModel, Long>{
+public interface IEmpregadorRepository extends Repository<Empregador, Long>{
 
-	void save(EmpregadorModel pessoa);
+	void save(Empregador pessoa);
 	 
-	void delete(EmpregadorModel pessoa);
+	void delete(Empregador pessoa);
  
-	List<EmpregadorModel> findAll();
+	List<Empregador> findAll();
  
-	EmpregadorModel findById(Integer id);                  
+	Empregador findById(Integer id);                  
 }                                                          
                                                            

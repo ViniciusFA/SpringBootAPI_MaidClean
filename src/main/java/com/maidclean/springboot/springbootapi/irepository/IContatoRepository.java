@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import com.maidclean.springboot.springbootapi.model.ContatoModel;
+import com.maidclean.springboot.springbootapi.model.Contato;
 
-public interface IContatoRepository extends Repository<ContatoModel, Long>{
+public interface IContatoRepository extends Repository<Contato, Long>{
 
-	void save(ContatoModel contato);
+	void save(Contato contato);
 	
-	void delete(ContatoModel pessoa);
+	void delete(Contato pessoa);
 	 
-	List<ContatoModel> findAll();
+	List<Contato> findAll();
  
-	ContatoModel findById(Integer id);
+	Contato findById(Integer id);
 	
 }

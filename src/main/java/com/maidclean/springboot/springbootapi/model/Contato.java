@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name = "tb_contatos")
-public class ContatoModel implements Serializable{
+public class Contato implements Serializable{
 
 	private static final long serialVersionUID = -8526802374793214301L;
 	
@@ -33,7 +33,7 @@ public class ContatoModel implements Serializable{
 	@Column(name = "dt_contato")
 	private Date dataContato;
 	
-	public ContatoModel() {}
+	public Contato() {}
 
 	public int getId_contato() {
 		return id;

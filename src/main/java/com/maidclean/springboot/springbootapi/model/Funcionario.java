@@ -16,38 +16,49 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_funcionarios")
-public class FuncionarioModel implements Serializable{
+public class Funcionario implements Serializable{
 
 	private static final long serialVersionUID = 4770619631728341970L;
 	
+	
+	
+	public Funcionario(Usuario usuario) {
+		super();
+		this.usuario = usuario;
+	}
+
+	public static Funcionario create(Usuario usuario) {
+		if(usuario == null) {
+			throw new IllegalArgumentException("Usuario está vazio.Por favor preencha-o.");
+		}
+		return new Funcionario(usuario);
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@JoinColumn(name="id")
+	@Column(name="id")
 	private Long id;
 	
-	@OneToOne(cascade = {})
-	@JoinColumn(name="ds_nome")
-	private UsuarioModel nome;	
+	@Column(name="ds_nome")
+	private String nome;	
 	
 	@Column(name="ds_cpf")
 	private String cpf;		
 	
-	@OneToOne
-	@JoinColumn(name="ds_login")
-	private UsuarioModel login;	
+	@Column(name="ds_login")
+	private String login;	
 	
 	@Column(name="ds_senha")	
 	private String senha;	
 	
-	@OneToOne
-	@JoinColumn(name="ds_email")
-	private UsuarioModel email;	
+	@Column(name="ds_email")
+	private String email;	
 	
 	@Column(name="ds_facebook")
 	private String url_facebook;
 	
 	@Column(name="vl_haswhatsapp")
-	private String hasWhatsapp;	
+	private boolean hasWhatsapp;	
 	
 	@Column(name="ds_telefone")
 	private String telefone;	
@@ -68,23 +79,21 @@ public class FuncionarioModel implements Serializable{
 	private String cidade;		
 	
 	@Column(name="vl_estado")
-	private String estado;	
+	private Integer estado;	
 	
 	@Column(name="ds_cep")
-	private String cep;	
-	
-	@Column(name="vl_avaliacao")
-	private String avaliacao;	
+	private String cep;		
 	
 	@Column(name="vl_sexo")
-	private String isMale;
+	private boolean isMale;
 	
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
-	public FuncionarioModel() {}
-
-
+	@OneToOne
+	@JoinColumn(name="id_usuario", nullable = false)
+	private Usuario usuario;
+	
 	public Long getId() {
 		return id;
 	}
@@ -97,11 +106,11 @@ public class FuncionarioModel implements Serializable{
 		this.cpf = cpf;
 	}
 	
-	public UsuarioModel getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(UsuarioModel nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
@@ -113,11 +122,11 @@ public class FuncionarioModel implements Serializable{
 		this.sobrenome = sobrenome;
 	}
 	
-	public UsuarioModel getLogin() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(UsuarioModel login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 	
@@ -129,11 +138,11 @@ public class FuncionarioModel implements Serializable{
 		this.senha = senha;
 	}	
 	
-	public UsuarioModel getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(UsuarioModel email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	
@@ -145,11 +154,11 @@ public class FuncionarioModel implements Serializable{
 		this.url_facebook = url_facebook;
 	}
 	
-	public String isHasWhatsapp() {
+	public boolean isHasWhatsapp() {
 		return hasWhatsapp;
 	}
 
-	public void setHasWhatsapp(String hasWhatsapp) {
+	public void setHasWhatsapp(boolean hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
 	
@@ -201,11 +210,11 @@ public class FuncionarioModel implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public String getEstado() {
+	public Integer getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
 	
@@ -217,20 +226,18 @@ public class FuncionarioModel implements Serializable{
 		this.cep = cep;
 	}
 	
-	public String getAvaliacao() {
-		return avaliacao;
-	}
-
-	public void setAvaliacao(String avaliacao) {
-		this.avaliacao = avaliacao;
-	}
 	
-	public String isMale() {
+	public boolean isMale() {
 		return isMale;
 	}
 
-	public void setMale(String isMale) {
+	public void setMale(boolean isMale) {
 		this.isMale = isMale;
+	}
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	@Override
@@ -239,8 +246,7 @@ public class FuncionarioModel implements Serializable{
 				+ sobrenome + ", login=" + login + ", senha=" + senha + ", email=" + email + ", url_facebook="
 				+ url_facebook + ", hasWhatsapp=" + hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao
 				+ ", experiencia=" + experiencia + ", endereco=" + endereco + ", complemento=" + complemento
-				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", avaliacao=" + avaliacao
-				+ ", isMale=" + isMale + "]";
+				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", isMale=" + isMale + "]";
 	}
 	
 }

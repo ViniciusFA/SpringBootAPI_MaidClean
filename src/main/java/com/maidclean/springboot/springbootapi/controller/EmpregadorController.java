@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maidclean.springboot.springbootapi.irepository.IEmpregadorRepository;
-import com.maidclean.springboot.springbootapi.model.EmpregadorModel;
-import com.maidclean.springboot.springbootapi.model.ResponseModel;
+import com.maidclean.springboot.springbootapi.model.Empregador;
+import com.maidclean.springboot.springbootapi.model.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -38,13 +38,13 @@ public class EmpregadorController {
 	 */
 	@RequestMapping(value="/empregador", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
 			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel save(@RequestBody EmpregadorModel empregador) {
+	public @ResponseBody Response save(@RequestBody Empregador empregador) {
 		try {				
 			this.empregadorRepository.save(empregador);			
-			return new ResponseModel(1, "Registro salvo com sucesso.");
+			return new Response(1, "Registro salvo com sucesso.");
 		}catch(Exception e) {
 			
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 	}
 
@@ -54,12 +54,12 @@ public class EmpregadorController {
 	 * @return
 	 */
 	@RequestMapping(value="empregador", method = RequestMethod.PUT, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE )
-	public @ResponseBody ResponseModel atualizar(@RequestBody EmpregadorModel empregador) {
+	public @ResponseBody Response atualizar(@RequestBody Empregador empregador) {
 		try {
 			this.empregadorRepository.save(empregador);
-			return new ResponseModel(1, "Registro atualizado com sucesso.");
+			return new Response(1, "Registro atualizado com sucesso.");
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 		
 	}
@@ -69,7 +69,7 @@ public class EmpregadorController {
 	 * @return
 	 */	
 	@RequestMapping(value="empregador", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<EmpregadorModel> consultar() {
+	public @ResponseBody List<Empregador> consultar() {
 		
 			return this.empregadorRepository.findAll();	
 	}
@@ -81,7 +81,7 @@ public class EmpregadorController {
 	 */
 	@RequestMapping(value="/empregador/{id_empregador}", method=RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody EmpregadorModel buscar(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {		
+	public @ResponseBody Empregador buscar(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {		
 		   return this.empregadorRepository.findById(id_empregador);			
 	}
 	
@@ -91,13 +91,13 @@ public class EmpregadorController {
 	 * @return
 	 */
 	@RequestMapping(value="/empregador/{id_empregador}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel excluir(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {
-		EmpregadorModel empregador = this.empregadorRepository.findById(id_empregador);
+	public @ResponseBody Response excluir(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {
+		Empregador empregador = this.empregadorRepository.findById(id_empregador);
 		try {
 			this.empregadorRepository.delete(empregador);
-			return new ResponseModel(1, "Registro excluído com sucesso.");
+			return new Response(1, "Registro excluído com sucesso.");
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 		
 	}

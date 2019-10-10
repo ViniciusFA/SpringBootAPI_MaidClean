@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.Repository;
 
-import com.maidclean.springboot.springbootapi.model.FuncionarioModel;
+import com.maidclean.springboot.springbootapi.model.Funcionario;
 
-public interface IFuncionarioRepository extends Repository<FuncionarioModel, Integer>{
+public interface IFuncionarioRepository extends Repository<Funcionario, Integer>{
 
-	void save(FuncionarioModel pessoa);
+	void save(Funcionario pessoa);
 	 
-	void delete(FuncionarioModel pessoa);
+	void delete(Funcionario pessoa);
  
-	List<FuncionarioModel> findAll();
+	List<Funcionario> findAll();
  
-	FuncionarioModel findById(Integer id);
+	Funcionario findById(Integer id);
 		
 }

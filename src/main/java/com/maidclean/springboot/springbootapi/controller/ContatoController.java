@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IContatoRepository;
-import com.maidclean.springboot.springbootapi.model.ContatoModel;
-import com.maidclean.springboot.springbootapi.model.EmpregadorModel;
-import com.maidclean.springboot.springbootapi.model.ResponseModel;
+import com.maidclean.springboot.springbootapi.model.Contato;
+import com.maidclean.springboot.springbootapi.model.Empregador;
+import com.maidclean.springboot.springbootapi.model.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -43,7 +43,7 @@ public class ContatoController {
 	 */
 	@RequestMapping(value="/contato", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
 			, produces=MediaType.APPLICATION_JSON_UTF8_VALUE )
-	public @ResponseBody ResponseModel save(@RequestBody ContatoModel contato) {
+	public @ResponseBody Response save(@RequestBody Contato contato) {
 		try {
 						
 			DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 			
@@ -51,9 +51,9 @@ public class ContatoController {
 			
 			
 			this.contatoRepository.save(contato);
-			return new ResponseModel(1, "Mensagem enviada com sucesso. Em breve entraremos em contato.");
+			return new Response(1, "Mensagem enviada com sucesso. Em breve entraremos em contato.");
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class ContatoController {
 	 * @return
 	 */	
 	@RequestMapping(value="/contato", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<ContatoModel> consultar() {
+	public @ResponseBody List<Contato> consultar() {
 		
 			return this.contatoRepository.findAll();
 	}
@@ -74,7 +74,7 @@ public class ContatoController {
 	 */
 	@RequestMapping(value="/contato/{id_contato}", method=RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ContatoModel buscar(@PathVariable("id_contato") @RequestBody Integer id_contato) {		
+	public @ResponseBody Contato buscar(@PathVariable("id_contato") @RequestBody Integer id_contato) {		
 		   return this.contatoRepository.findById(id_contato);			
 	}
 	
@@ -84,13 +84,13 @@ public class ContatoController {
 	 * @return
 	 */
 	@RequestMapping(value="/contato/{id_contato}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel excluir(@PathVariable("id_contato") @RequestBody Integer id_contato) {
-		ContatoModel contato = this.contatoRepository.findById(id_contato);
+	public @ResponseBody Response excluir(@PathVariable("id_contato") @RequestBody Integer id_contato) {
+		Contato contato = this.contatoRepository.findById(id_contato);
 		try {
 			this.contatoRepository.delete(contato);
-			return new ResponseModel(1, "Registro excluído com sucesso.");
+			return new Response(1, "Registro excluído com sucesso.");
 		}catch(Exception e) {
-			return new ResponseModel(0, e.getMessage());
+			return new Response(0, e.getMessage());
 		}
 		
 	}

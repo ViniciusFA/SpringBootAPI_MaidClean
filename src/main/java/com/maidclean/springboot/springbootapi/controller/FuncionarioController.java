@@ -83,7 +83,7 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Funcionario buscar(@PathVariable("id_funcionario") Integer id_funcionario) {
+	public @ResponseBody Funcionario buscar(@PathVariable("id_funcionario") Long id_funcionario) {
 				
 		return this.funcionarioRepository.findById(id_funcionario);
 	}
@@ -94,7 +94,7 @@ public class FuncionarioController {
 	 * @return
 	 */
 	@RequestMapping(value="/funcionario/{id_funcionario}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response excluir(@PathVariable("id_funcionario") Integer id_funcionario) {
+	public @ResponseBody Response excluir(@PathVariable("id_funcionario") Long id_funcionario) {
 		
 		Funcionario funcionario = funcionarioRepository.findById(id_funcionario);
 		

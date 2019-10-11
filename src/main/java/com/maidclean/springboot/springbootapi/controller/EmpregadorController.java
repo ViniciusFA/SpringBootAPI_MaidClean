@@ -79,7 +79,7 @@ public class EmpregadorController {
 	 */
 	@RequestMapping(value="/empregador/{id_empregador}", method=RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Empregador buscar(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {		
+	public @ResponseBody Empregador buscar(@PathVariable("id_empregador") @RequestBody Long id_empregador) {		
 		   return this.empregadorRepository.findById(id_empregador);			
 	}
 	
@@ -89,7 +89,7 @@ public class EmpregadorController {
 	 * @return
 	 */
 	@RequestMapping(value="/empregador/{id_empregador}", method = RequestMethod.DELETE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response excluir(@PathVariable("id_empregador") @RequestBody Integer id_empregador) {
+	public @ResponseBody Response excluir(@PathVariable("id_empregador") @RequestBody Long id_empregador) {
 		Empregador empregador = this.empregadorRepository.findById(id_empregador);
 		try {
 			this.empregadorRepository.delete(empregador);

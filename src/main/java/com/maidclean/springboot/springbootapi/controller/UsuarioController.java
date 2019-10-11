@@ -43,10 +43,10 @@ public class UsuarioController {
 	 * @param codigo
 	 * @return
 	 */
-	@RequestMapping(value = "/usuario/{login}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Usuario buscar(@PathVariable("login") String login) {
+	@RequestMapping(value = "/usuario/{nm_usuario}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Usuario buscar(@PathVariable("nm_usuario") String nm_usuario) {
 				
-		return this.usuarioRepository.findByLogin(login);
+		return this.usuarioRepository.findByLogin(nm_usuario);
 	}
 	
 

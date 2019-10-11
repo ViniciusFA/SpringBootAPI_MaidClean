@@ -19,7 +19,7 @@ public class Funcionario implements Serializable{
 
 	private static final long serialVersionUID = 4770619631728341970L;
 	
-	
+	public Funcionario () {}
 	
 	public Funcionario(Usuario usuario) {
 		super();

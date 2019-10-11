@@ -14,6 +14,6 @@ public interface IFuncionarioRepository extends Repository<Funcionario, Integer>
  
 	List<Funcionario> findAll();
  
-	Funcionario findById(Integer id);
+	Funcionario findById(Long id);
 		
 }

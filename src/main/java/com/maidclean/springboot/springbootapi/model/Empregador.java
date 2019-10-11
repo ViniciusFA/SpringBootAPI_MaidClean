@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Entity
 @Table(name = "tb_empregadores")
 public class Empregador implements Serializable{

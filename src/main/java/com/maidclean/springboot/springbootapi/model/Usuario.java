@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -30,10 +28,10 @@ public class Usuario implements UserDetails, Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_usuario")
-	private Long id;
+	private Long id_usuario;
 	
 	@Column(name="ds_login")
-	private String login;
+	private String nm_usuario;
 	
 	@Column(name="ds_senha")
 	private String senha;
@@ -46,20 +44,14 @@ public class Usuario implements UserDetails, Serializable{
 	
 	@ManyToMany
 	@JsonIgnore
-	@JoinTable( 
-	        name = "tb_usuarios_roles", 
-	        joinColumns = @JoinColumn(
-	        name = "usuario_id", referencedColumnName = "id_usuario"), 
-	        inverseJoinColumns = @JoinColumn(
-	          name = "role_id", referencedColumnName = "nameRule")) 
 	private List<Role> roles;
 		
 	public String getLogin() {
-		return login;
+		return nm_usuario;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String nm_usuario) {
+		this.nm_usuario = nm_usuario;
 	}
 
 	public String getNome() {
@@ -83,7 +75,7 @@ public class Usuario implements UserDetails, Serializable{
 	}
 
 	public Long getId() {
-		return id;
+		return id_usuario;
 	}
 	
 	public String getSenha() {
@@ -104,7 +96,7 @@ public class Usuario implements UserDetails, Serializable{
 
 	@Override
 	public String toString() {
-		return "UsuarioModel [id=" + id + ", login=" + login + ", nome=" + nome + ", email=" + email + 
+		return "UsuarioModel [id_usuario=" + id_usuario + ", nm_usuario=" + nm_usuario + ", nome=" + nome + ", email=" + email + 
 				", senha=" + senha + "]";
 	}
 
@@ -123,7 +115,7 @@ public class Usuario implements UserDetails, Serializable{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.login;
+		return this.nm_usuario;
 	}
 
 	@Override

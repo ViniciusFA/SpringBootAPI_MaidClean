@@ -2,7 +2,6 @@ package com.maidclean.springboot.springbootapi.controller;
 
 import java.util.List;
 
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maidclean.springboot.springbootapi.irepository.IEmpregadorRepository;
 import com.maidclean.springboot.springbootapi.model.Empregador;
 import com.maidclean.springboot.springbootapi.model.Response;

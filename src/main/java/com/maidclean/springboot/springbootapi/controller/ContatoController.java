@@ -1,10 +1,8 @@
 package com.maidclean.springboot.springbootapi.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IContatoRepository;
 import com.maidclean.springboot.springbootapi.model.Contato;
-import com.maidclean.springboot.springbootapi.model.Empregador;
 import com.maidclean.springboot.springbootapi.model.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -46,7 +43,7 @@ public class ContatoController {
 	public @ResponseBody Response save(@RequestBody Contato contato) {
 		try {
 						
-			DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 			
+			//DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 			
 			contato.setDataContato(new Date());
 			
 			

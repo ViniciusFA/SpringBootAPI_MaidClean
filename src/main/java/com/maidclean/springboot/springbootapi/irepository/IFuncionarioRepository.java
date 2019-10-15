@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.maidclean.springboot.springbootapi.model.Funcionario;
 
-public interface IFuncionarioRepository extends Repository<Funcionario, Integer>, JpaSpecificationExecutor<Funcionario>{
+public interface IFuncionarioRepository extends Repository<Funcionario, Integer>{
 
 	void save(Funcionario pessoa);
 	 
@@ -18,6 +19,9 @@ public interface IFuncionarioRepository extends Repository<Funcionario, Integer>
 	List<Funcionario> findAll();
  
 	Funcionario findById(Long id);	
+	
+	
+	
 	
 	/*@Query(value="SELECT * FROM tb_funcionarios u where u.ds_nome = :nome "
 			+ "and u.ds_sobrenome =:sobrenome "

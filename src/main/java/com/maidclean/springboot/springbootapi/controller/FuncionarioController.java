@@ -2,13 +2,16 @@ package com.maidclean.springboot.springbootapi.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IFuncionarioRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
+import com.maidclean.springboot.springbootapi.model.PesquisaFuncionario;
 import com.maidclean.springboot.springbootapi.model.Response;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -82,19 +86,6 @@ public class FuncionarioController {
 		return this.funcionarioRepository.findAll();		
 	}
 	
-	/**
-	 * CONSULTAR FUNCIONÁRIOS DE ACORDO COM O PARAMÊTRO PASSADO NA PESQUISA
-	 * @return
-	 */	
-	@RequestMapping(value="/funcionario/fullSearch",method = RequestMethod.GET, 
-			produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody <List>Funcionario buscarFiltro(@PathVariable  Funcionario funcionarioFIltro){
-		
-	
-		
-		return this.funcionarioRepository.findAll(Example.of(funcionarioFIltro));
-		
-	}
 	
 	
 	

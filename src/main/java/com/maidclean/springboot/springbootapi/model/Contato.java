@@ -26,8 +26,8 @@ public class Contato implements Serializable{
 	private String sobrenome;	
 	@Column(name = "ds_email")
 	private String email;	
-	@Column(name = "vl_motivo")
-	private int motivo;	
+	@Column(name = "ds_motivo")
+	private String motivo;	
 	@Column(name = "ds_mensagem")
 	private String mensagem;
 	@Column(name = "dt_contato")
@@ -67,11 +67,11 @@ public class Contato implements Serializable{
 		this.email = email;
 	}
 
-	public int getMotivo() {
+	public String getMotivo() {
 		return motivo;
 	}
 
-	public void setMotivo(int motivo) {
+	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
 

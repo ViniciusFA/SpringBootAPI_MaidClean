@@ -48,7 +48,7 @@ public class ContatoController {
 			
 			
 			this.contatoRepository.save(contato);
-			return new Response(1, "Mensagem enviada com sucesso. Em breve entraremos em contato.");
+			return new Response(1, "Mensagem enviada com sucesso.\n Em breve entraremos em contato.");
 		}catch(Exception e) {
 			return new Response(0, e.getMessage());
 		}

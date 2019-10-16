@@ -56,8 +56,8 @@ public class Funcionario implements Serializable{
 	@Column(name="ds_facebook")
 	private String url_facebook;
 	
-	@Column(name="vl_haswhatsapp")
-	private boolean hasWhatsapp;	
+	@Column(name="ds_haswhatsapp")
+	private String hasWhatsapp;	
 	
 	@Column(name="ds_telefone")
 	private String telefone;	
@@ -77,22 +77,19 @@ public class Funcionario implements Serializable{
 	@Column(name="ds_cidade")
 	private String cidade;		
 	
-	@Column(name="vl_estado")
-	private Integer estado;	
+	@Column(name="ds_estado")
+	private String estado;	
 	
 	@Column(name="ds_cep")
 	private String cep;		
 	
-	@Column(name="vl_sexo")
-	private boolean isMale;
+	@Column(name="ds_sexo")
+	private String sexo;
 	
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
-	@OneToOne
-	@JoinColumn(name="id_usuario", nullable = false)
-	private Usuario usuario;
-	
+		
 	public Long getId() {
 		return id;
 	}
@@ -153,14 +150,14 @@ public class Funcionario implements Serializable{
 		this.url_facebook = url_facebook;
 	}
 	
-	public boolean isHasWhatsapp() {
+	public String getHasWhatsapp() {
 		return hasWhatsapp;
 	}
 
-	public void setHasWhatsapp(boolean hasWhatsapp) {
+	public void setHasWhatsapp(String hasWhatsapp) {
 		this.hasWhatsapp = hasWhatsapp;
 	}
-	
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -209,11 +206,11 @@ public class Funcionario implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public Integer getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Integer estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 	
@@ -224,17 +221,15 @@ public class Funcionario implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	
-	public boolean isMale() {
-		return isMale;
+		
+	public String getSexo() {
+		return sexo;
 	}
 
-	public void setMale(boolean isMale) {
-		this.isMale = isMale;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
-	
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -245,7 +240,7 @@ public class Funcionario implements Serializable{
 				+ sobrenome + ", login=" + login + ", senha=" + senha + ", email=" + email + ", url_facebook="
 				+ url_facebook + ", hasWhatsapp=" + hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao
 				+ ", experiencia=" + experiencia + ", endereco=" + endereco + ", complemento=" + complemento
-				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", isMale=" + isMale + "]";
+				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", sexo=" + sexo + "]";
 	}
 	
 }

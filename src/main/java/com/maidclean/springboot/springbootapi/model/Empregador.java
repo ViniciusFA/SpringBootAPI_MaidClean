@@ -22,8 +22,8 @@ public class Empregador implements Serializable{
 	@Column(name="id_empregador")	
 	private Long id_empregador;	
 	
-	@Column(name="cpf")	
-	private int cpf;	
+	@Column(name="ds_cnpj_cpf")	
+	private String cnpj;	
 	
 	@Column(name="ds_nome")	
 	private String nome;	
@@ -38,18 +38,12 @@ public class Empregador implements Serializable{
 	private String senha;	
 	
 	@Column(name="ds_email")	
-	private String email;	
+	private String email;		
 	
-	@Column(name="ds_facebook")	
-	private String url_facebook;
+	@Column(name="ds_telefone")	
+	private String telefone;	
 	
-	@Column(name="haswhatsapp")	
-	private boolean hasWhatsapp;
-	
-	@Column(name="telefone")	
-	private int telefone;	
-	
-	@Column(name="residencia")	
+	@Column(name="ds_residencia")	
 	private String residencia;	
 	
 	@Column(name="ds_endereco")	
@@ -58,30 +52,30 @@ public class Empregador implements Serializable{
 	@Column(name="ds_complemento")	
 	private String complemento;	
 	
-	@Column(name="nm_cidade")	
+	@Column(name="ds_cidade")	
 	private String cidade;	
 	
-	@Column(name="vl_estado")	
-	private int estado;	
+	@Column(name="ds_estado")	
+	private String estado;	
 	
-	@Column(name="cep")	
-	private int cep;	
+	@Column(name="ds_cep")	
+	private String cep;	
 	
-	@Column(name="vl_sexo")	
-	private boolean isMale;
+	@Column(name="ds_sexo")	
+	private String sexo;
 	
 	public Long getId() {
 		return id_empregador;
 	}
 	
-	public int getCpf() {
-		return cpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCpf(int cpf) {
-		this.cpf = cpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -122,27 +116,12 @@ public class Empregador implements Serializable{
 		this.email = email;
 	}
 	
-	public String getUrl_facebook() {
-		return url_facebook;
-	}
-
-	public void setUrl_facebook(String url_facebook) {
-		this.url_facebook = url_facebook;
-	}
 	
-	public boolean isHasWhatsapp() {
-		return hasWhatsapp;
-	}
-
-	public void setHasWhatsapp(boolean hasWhatsapp) {
-		this.hasWhatsapp = hasWhatsapp;
-	}
-	
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
@@ -178,37 +157,36 @@ public class Empregador implements Serializable{
 		this.cidade = cidade;
 	}
 	
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 	
-	public int getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(int cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	public boolean isMale() {
-		return isMale;
+			
+	public String getSexo() {
+		return sexo;
 	}
 
-	public void setMale(boolean isMale) {
-		this.isMale = isMale;
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
-		
+
 	@Override
 	public String toString() {
-		return "EmpregadorModel [id_empregador=" + id_empregador + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome="
-				+ sobrenome + ", login=" + login + ", senha=" + senha + ", email=" + email + ", url_facebook="
-				+ url_facebook + ", hasWhatsapp=" + hasWhatsapp + ", telefone=" + telefone + ", residencia="
+		return "EmpregadorModel [id_empregador=" + id_empregador + ", cnpj_cpf=" + cnpj + ", nome=" + nome + ", sobrenome="
+				+ sobrenome + ", login=" + login + ", senha=" + senha + ", email=" + email + ", telefone=" + telefone + ", residencia="
 				+ residencia + ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade
-				+ ", estado=" + estado + ", cep=" + cep + ", isMale=" + isMale + "]";
+				+ ", estado=" + estado + ", cep=" + cep + ", sexo=" + sexo + "]";
 	}	
 	
 }

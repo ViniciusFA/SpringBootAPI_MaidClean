@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="tb_usuarios",schema = "public")
+@Table(name="tb_usuarios")
 public class Usuario implements UserDetails, Serializable{
 
 	private static final long serialVersionUID = -2606442091344673140L;		
@@ -43,6 +44,7 @@ public class Usuario implements UserDetails, Serializable{
 	private String email;
 	
 	@ManyToMany
+	@Transient
 	@JsonIgnore
 	private List<Role> roles;
 		

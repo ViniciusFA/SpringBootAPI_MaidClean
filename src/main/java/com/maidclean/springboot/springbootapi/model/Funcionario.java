@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -89,7 +90,9 @@ public class Funcionario implements Serializable{
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
-		
+	@Transient
+	private Usuario usuario;
+	
 	public Long getId() {
 		return id;
 	}

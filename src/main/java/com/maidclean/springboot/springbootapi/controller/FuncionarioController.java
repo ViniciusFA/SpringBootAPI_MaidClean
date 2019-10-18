@@ -86,6 +86,7 @@ public class FuncionarioController {
 		return this.funcionarioRepository.findAll();
 	}
 
+	
 	/**
 	 * BUSCAR UMA PESSOA PELO CÓDIGO
 	 * 

@@ -44,80 +44,101 @@ public class FuncionarioController {
 	 * @param funcionario
 	 * @return
 	 */
-	@RequestMapping(value = "/funcionario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response save(@RequestBody Funcionario funcionario) {
-
-		try {
-			this.funcionarioRepository.save(funcionario);
-
-			return new Response(1, "Registro salvo com sucesso.");
-
-		} catch (Exception e) {
-			return new Response(0, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * ATUALIZAR O REGISTRO DE UMA PESSOA
+	/*
+	 * @RequestMapping(value = "/funcionario", method = RequestMethod.POST, consumes
+	 * = MediaType.APPLICATION_JSON_UTF8_VALUE, produces =
+	 * MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody Response
+	 * save(@RequestBody Funcionario funcionario) {
 	 * 
-	 * @param funcionario
-	 * @return
-	 */
-	@RequestMapping(value = "/funcionario", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response atualizar(@RequestBody Funcionario funcionario) {
-		try {
-			this.funcionarioRepository.save(funcionario);
-
-			return new Response(1, "Registro atualizado com sucesso.");
-		} catch (Exception e) {
-			return new Response(0, e.getMessage());
-		}
-	}
-
-	/**
-	 * CONSULTAR TODAS AS PESSOAS
+	 * try { this.funcionarioRepository.save(funcionario);
 	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/funcionario", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<Funcionario> consultar() {
-
-		return this.funcionarioRepository.findAll();
-	}
-
-	
-	/**
-	 * BUSCAR UMA PESSOA PELO CÓDIGO
+	 * return new Response(1, "Registro salvo com sucesso.");
 	 * 
-	 * @param codigo
-	 * @return
-	 */
-	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Funcionario buscar(@PathVariable("id_funcionario") Long id_funcionario) {
-
-		return this.funcionarioRepository.findById(id_funcionario);
-	}
-
-	/***
-	 * EXCLUIR UM REGISTRO PELO CÓDIGO
+	 * } catch (Exception e) { return new Response(0, e.getMessage()); }
 	 * 
-	 * @param codigo
-	 * @return
-	 */
-	@RequestMapping(value = "/funcionario/{id_funcionario}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response excluir(@PathVariable("id_funcionario") Long id_funcionario) {
-
-		Funcionario funcionario = funcionarioRepository.findById(id_funcionario);
-
-		try {
-			funcionarioRepository.delete(funcionario);
-
-			return new Response(1, "Registro excluído com sucesso.");
-
-		} catch (Exception e) {
-			return new Response(0, e.getMessage());
-		}
-	}
+	 * }
+	 * 
+	 *//**
+		 * ATUALIZAR O REGISTRO DE UMA PESSOA
+		 * 
+		 * @param funcionario
+		 * @return
+		 */
+	/*
+	 * @RequestMapping(value = "/funcionario", method = RequestMethod.PUT, consumes
+	 * = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody Response
+	 * atualizar(@RequestBody Funcionario funcionario) { try {
+	 * this.funcionarioRepository.save(funcionario);
+	 * 
+	 * return new Response(1, "Registro atualizado com sucesso."); } catch
+	 * (Exception e) { return new Response(0, e.getMessage()); } }
+	 * 
+	 *//**
+		 * CONSULTAR TODAS AS PESSOAS
+		 * 
+		 * @return
+		 */
+	/*
+	 * @RequestMapping(value = "/funcionario", method = RequestMethod.GET, produces
+	 * = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
+	 * List<Funcionario> consultar() {
+	 * 
+	 * return this.funcionarioRepository.findAll(); }
+	 * 
+	 * 
+	 *//**
+		 * BUSCAR UMA PESSOA PELO CÓDIGO
+		 * 
+		 * @param codigo
+		 * @return
+		 */
+	/*
+	 * @RequestMapping(value = "/funcionario/{id_funcionario}", method =
+	 * RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 * public @ResponseBody Funcionario buscar(@PathVariable("id_funcionario") Long
+	 * id_funcionario) {
+	 * 
+	 * return this.funcionarioRepository.findById(id_funcionario); }
+	 * 
+	 *//**
+		 * BUSCAR UMA PESSOA PELO USUÁRIO E SENHA
+		 * 
+		 * @param login and senha
+		 * @return
+		 */
+	/*
+	 * @RequestMapping(value="/funcionario/{login}/{senha}", method =
+	 * RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 * public @ResponseBody Response login(@PathVariable("login") String login,
+	 * 
+	 * @PathVariable("senha") String senha){ try { Funcionario funcionario =
+	 * this.funcionarioRepository.encontrarLogin(login,senha); if(funcionario !=
+	 * null ) { System.out.println(funcionario); return new Response(1,
+	 * "Seja Bem-vindo.",usuario.id_role); }else { System.out.println(funcionario);
+	 * return new Response(0, "Usuário não encontrado"); } }catch(Exception e) {
+	 * return new Response(0, e.getMessage()); }
+	 * 
+	 * }
+	 * 
+	 * 
+	 *//***
+		 * EXCLUIR UM REGISTRO PELO CÓDIGO
+		 * 
+		 * @param codigo
+		 * @return
+		 *//*
+			 * @RequestMapping(value = "/funcionario/{id_funcionario}", method =
+			 * RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+			 * public @ResponseBody Response excluir(@PathVariable("id_funcionario") Long
+			 * id_funcionario) {
+			 * 
+			 * Funcionario funcionario = funcionarioRepository.findById(id_funcionario);
+			 * 
+			 * try { funcionarioRepository.delete(funcionario);
+			 * 
+			 * return new Response(1, "Registro excluído com sucesso.");
+			 * 
+			 * } catch (Exception e) { return new Response(0, e.getMessage()); } }
+			 */
 
 }

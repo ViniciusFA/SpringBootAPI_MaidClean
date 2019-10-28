@@ -22,13 +22,12 @@ public class Role implements GrantedAuthority{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="name_rule")
-	public String nameRule;
+	@Column(name="id_role")
+	private int id_role;	
 	
-	@ManyToMany
-	@JsonIgnore
-	private List<Usuario> usuarios;
-		
+	@Column(name="name_role")
+	public String nameRule;	
+
 	
 	public String getNameRule() {
 		return nameRule;
@@ -36,6 +35,10 @@ public class Role implements GrantedAuthority{
 
 	public void setNameRule(String nameRule) {
 		this.nameRule = nameRule;
+	}
+	
+	public int getId_role() {
+		return id_role;
 	}
 
 	@Override

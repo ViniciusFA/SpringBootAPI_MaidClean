@@ -11,7 +11,6 @@ import com.maidclean.springboot.springbootapi.model.Funcionario;
 
 public interface IPesquisaFuncionarioRepository extends Repository<Funcionario,Integer>, JpaSpecificationExecutor<Funcionario>{
 
-	//Como pegar os atributos nome,sobrenome...do objeto Funcionario?
 	@Query("SELECT f FROM Funcionario f where f.nome =:nome "
 			+ "OR f.nome =:nome AND f.sobrenome =:sobrenome "
 			+ "OR f.nome =:nome AND f.sobrenome =:sobrenome  AND f.estado =:estado "

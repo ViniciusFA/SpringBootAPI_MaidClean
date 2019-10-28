@@ -4,12 +4,14 @@ public class Response {
 
 	private int codigo;
 	private String mensagem;
+	private int id_role;
  
 	public Response() {}
  
-	public Response(int codigo, String mensagem) {
+	public Response(int codigo, String mensagem,int id_role) {
 		this.codigo   = codigo;
 		this.mensagem =  mensagem;
+		this.id_role = id_role;
 	}
  
 	public int getCodigo() {
@@ -24,6 +26,10 @@ public class Response {
  
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	public int getId_role() {
+		return id_role;
 	}
 	
 }

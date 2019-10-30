@@ -27,40 +27,28 @@ public class PesquisaController {
 		this.pesquisaFuncionarioRepository = pesquisaFuncionarioRepository;
 	}
 	
-	@RequestMapping(value = "/funcionario/listaFuncionarios", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<Funcionario> buscarParam(Funcionario funcionario) {
-		//Recebendo os atributos dos campos vindo do Front-End
-		String nome = funcionario.getNome();
-		String sobrenome = funcionario.getSobrenome();
-		String estado = funcionario.getEstado();
-		String cidade = funcionario.getCidade();
-		String sexo = funcionario.getSexo();
-		String experiencia = funcionario.getExperiencia();
-		
-		System.out.println("\nNome: " + nome);
-		System.out.println("Sobrenome: " + sobrenome);
-		System.out.println("Estado: " + estado);
-		System.out.println("Cidade: " + cidade);
-		System.out.println("Sexo: " + sexo);
-		System.out.println("Experiência: " + experiencia);
-		System.out.println("\n");
-		
-		List<Funcionario> listaFuncionario = this.pesquisaFuncionarioRepository.consultarParametro(
-				nome, 
-				sobrenome, 
-				estado, 
-				cidade, 
-				sexo, 
-				experiencia
-				);
-		
-		System.out.println("\n");
-		for(int i =0;i<listaFuncionario.size();i++) {
-			System.out.println("Funcionario "+ i + " : " + listaFuncionario);
-		}
-		System.out.println("\n");
-		return listaFuncionario;
-	}
-	
+	/*
+	 * @RequestMapping(value = "/funcionario/listaFuncionarios", method =
+	 * RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	 * public @ResponseBody List<Funcionario> buscarParam(Funcionario funcionario) {
+	 * //Recebendo os atributos dos campos vindo do Front-End String nome =
+	 * funcionario.getNome(); String sobrenome = funcionario.getSobrenome(); String
+	 * estado = funcionario.getEstado(); String cidade = funcionario.getCidade();
+	 * String sexo = funcionario.getSexo(); String experiencia =
+	 * funcionario.getExperiencia();
+	 * 
+	 * System.out.println("\nNome: " + nome); System.out.println("Sobrenome: " +
+	 * sobrenome); System.out.println("Estado: " + estado);
+	 * System.out.println("Cidade: " + cidade); System.out.println("Sexo: " + sexo);
+	 * System.out.println("Experiência: " + experiencia); System.out.println("\n");
+	 * 
+	 * List<Funcionario> listaFuncionario =
+	 * this.pesquisaFuncionarioRepository.consultarParametro( nome, sobrenome,
+	 * estado, cidade, sexo, experiencia );
+	 * 
+	 * System.out.println("\n"); for(int i =0;i<listaFuncionario.size();i++) {
+	 * System.out.println("Funcionario "+ i + " : " + listaFuncionario); }
+	 * System.out.println("\n"); return listaFuncionario; }
+	 */
 	
 }

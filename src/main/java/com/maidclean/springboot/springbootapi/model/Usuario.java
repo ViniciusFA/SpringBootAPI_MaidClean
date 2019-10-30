@@ -30,7 +30,7 @@ public class Usuario implements UserDetails, Serializable{
 	private Long id_usuario;
 		
 	@Column(name="ds_login")
-	private String nm_usuario;
+	private String login;
 	
 	@Column(name="ds_senha")
 	private String senha;
@@ -47,7 +47,7 @@ public class Usuario implements UserDetails, Serializable{
 	@Column(name="ds_facebook")
 	private String facebook;
 
-	@Column(name="ds_hasWhatsapp")
+	@Column(name="ds_has_Whatsapp")
 	private String hasWhatsapp;
 	
 	@Column(name="ds_telefone")
@@ -88,13 +88,21 @@ public class Usuario implements UserDetails, Serializable{
 	
 	@Column(name="ds_email")
 	private String email;
-			
+	
 	public String getLogin() {
-		return nm_usuario;
+		return login;
 	}
 
-	public void setLogin(String nm_usuario) {
-		this.nm_usuario = nm_usuario;
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNome() {
@@ -105,38 +113,6 @@ public class Usuario implements UserDetails, Serializable{
 		this.nome = nome;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Long getId() {
-		return id_usuario;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}	
-	
-	public String getNm_usuario() {
-		return nm_usuario;
-	}
-
-	public void setNm_usuario(String nm_usuario) {
-		this.nm_usuario = nm_usuario;
-	}
-
 	public String getSobrenome() {
 		return sobrenome;
 	}
@@ -144,7 +120,6 @@ public class Usuario implements UserDetails, Serializable{
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-
 
 	public String getCpf_cnpj() {
 		return cpf_cnpj;
@@ -258,7 +233,18 @@ public class Usuario implements UserDetails, Serializable{
 		this.residencia = residencia;
 	}
 
-	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Long getId_usuario() {
 		return id_usuario;
 	}
@@ -267,16 +253,14 @@ public class Usuario implements UserDetails, Serializable{
 		return id_role;
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "Usuario [id_usuario=" + id_usuario + ", nm_usuario=" + nm_usuario + ", senha=" + senha + ", nome="
-				+ nome + ", sobrenome=" + sobrenome + ", cpf_cnpj=" + cpf_cnpj + ", facebook=" + facebook
-				+ ", hasWhatsapp=" + hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao
-				+ ", experiencia=" + experiencia + ", endereco=" + endereco + ", complemento=" + complemento
-				+ ", cidade=" + cidade + ", estado=" + estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao="
-				+ avaliacao + ", residencia=" + residencia + ", id_role=" + id_role + ", email=" + email + "]";
+		return "Usuario [id_usuario=" + id_usuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
+				+ ", sobrenome=" + sobrenome + ", cpf_cnpj=" + cpf_cnpj + ", facebook=" + facebook + ", hasWhatsapp="
+				+ hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao + ", experiencia=" + experiencia
+				+ ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade + ", estado="
+				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao=" + avaliacao + ", residencia=" + residencia
+				+ ", id_role=" + id_role + ", email=" + email + "]";
 	}
 
 	
@@ -298,7 +282,7 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((hasWhatsapp == null) ? 0 : hasWhatsapp.hashCode());
 		result = prime * result + id_role;
 		result = prime * result + ((id_usuario == null) ? 0 : id_usuario.hashCode());
-		result = prime * result + ((nm_usuario == null) ? 0 : nm_usuario.hashCode());
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
 		result = prime * result + ((residencia == null) ? 0 : residencia.hashCode());
@@ -380,10 +364,10 @@ public class Usuario implements UserDetails, Serializable{
 				return false;
 		} else if (!id_usuario.equals(other.id_usuario))
 			return false;
-		if (nm_usuario == null) {
-			if (other.nm_usuario != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!nm_usuario.equals(other.nm_usuario))
+		} else if (!login.equals(other.login))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -438,7 +422,7 @@ public class Usuario implements UserDetails, Serializable{
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.nm_usuario;
+		return this.nome;
 	}
 
 	@Override

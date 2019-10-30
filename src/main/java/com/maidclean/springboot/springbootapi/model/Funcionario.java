@@ -90,6 +90,18 @@ public class Funcionario implements Serializable{
 	@Column(name="ds_sobrenome")
 	private String sobrenome;
 	
+	@Column(name="id_role")
+	private String id_role;
+	
+	public Integer getId_role() {
+		Integer id_role_ref = Integer.parseInt(id_role);
+		return id_role_ref;
+	}
+
+	public void setId_role(String id_role) {
+		this.id_role = id_role;
+	}
+
 	@Transient
 	private Usuario usuario;
 	

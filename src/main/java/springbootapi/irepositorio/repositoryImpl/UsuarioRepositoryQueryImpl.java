@@ -1,4 +1,4 @@
-package springbootapi.irepositorio.usuario;
+package springbootapi.irepositorio.repositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
 @Repository
-public class UsuarioRepositoryImpl implements IUsuarioRepositoryQuery{
+public class UsuarioRepositoryQueryImpl implements IUsuarioRepositoryQuery{
 
 	@PersistenceContext
 	private EntityManager entityManager;

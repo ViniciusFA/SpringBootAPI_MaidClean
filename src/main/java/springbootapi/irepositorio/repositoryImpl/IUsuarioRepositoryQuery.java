@@ -1,4 +1,4 @@
-package springbootapi.irepositorio.usuario;
+package springbootapi.irepositorio.repositoryImpl;
 
 import java.util.List;
 

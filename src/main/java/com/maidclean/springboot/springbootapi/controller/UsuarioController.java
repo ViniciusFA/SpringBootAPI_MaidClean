@@ -1,11 +1,22 @@
 package com.maidclean.springboot.springbootapi.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.MatrixVariable;
@@ -19,10 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
+import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
-import springbootapi.irepositorio.usuario.IUsuarioRepositoryQuery;
+import springbootapi.irepositorio.repositoryImpl.IUsuarioRepositoryQuery;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -33,6 +45,7 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 
+	
 	public UsuarioController(IUsuarioRepository usuarioRepository) {
 		super();
 		this.usuarioRepository = usuarioRepository;
@@ -63,10 +76,10 @@ public class UsuarioController {
 		try {
 			this.usuarioRepository.save(usuario);
 
-			return new Response(1, "Usuário cadastrado com sucesso.", usuario.getId_role());
+			return new Response(1, "Usuário cadastrado com sucesso.", usuario.getIdRole());
 
 		} catch (Exception e) {
-			return new Response(0, e.getMessage(), usuario.getId_role());
+			return new Response(0, e.getMessage(), usuario.getIdRole());
 		}
 
 	}
@@ -82,9 +95,9 @@ public class UsuarioController {
 		try {
 			this.usuarioRepository.save(usuario);
 
-			return new Response(1, "Usuário atualizado com sucesso.", usuario.getId_role());
+			return new Response(1, "Usuário atualizado com sucesso.", usuario.getIdRole());
 		} catch (Exception e) {
-			return new Response(0, e.getMessage(), usuario.getId_role());
+			return new Response(0, e.getMessage(), usuario.getIdRole());
 		}
 	}
 
@@ -106,46 +119,38 @@ public class UsuarioController {
 	 * @return
 	 */
 
-	/*
-	 * @RequestMapping(value = "/usuario", params= {"idRole"}, method =
-	 * RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	 * public @ResponseBody List<Usuario>
-	 * buscarUsuarioPorPerfil(@RequestParam("idRole") int idRole) { //int idRoleRef
-	 * = Integer.parseInt(idRole); return
-	 * this.usuarioRepository.findByIdRole(idRole); }
-	 */
+	
+	  @RequestMapping(value = "/usuario", params= {"idRole"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	  public @ResponseBody List<Usuario> buscarUsuarioPorPerfil(@RequestParam("idRole") int idRole) { 
+	  
+		 Usuario usuario = new Usuario();
+		 usuario.setIdRole(idRole);
+	  return this.usuarioRepository.findByIdRole(usuario.getIdRole()); 
+	  }
+	 
 
 	@RequestMapping(value = "/usuario/listaUsuarios", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<Usuario> buscarParam(Usuario funcionario) {
+	public @ResponseBody List<Usuario> buscarParam(Usuario usuario) {
+				
 		
-		//Recebendo os atributos dos campos vindo do Front-End
 		
-		Usuario usuario = new Usuario();
-		usuario.setNome(funcionario.getNome());
-		Example example = Example.create(usuario).enableLike(MatchMode.ANYWHERE);
-	
-		
-		String nome = funcionario.getNome();
-		String sobrenome = funcionario.getSobrenome();
-		String estado = funcionario.getEstado();
-		String cidade = funcionario.getCidade();
-		String experiencia = funcionario.getExperiencia();
-		String sexo = funcionario.getSexo();
-		
-		System.out.println("\nNome: " + nome);
-		System.out.println("Sobrenome: " + sobrenome);
-		System.out.println("Estado: " + estado);
-		System.out.println("Cidade: " + cidade);
-		System.out.println("Sexo: " + sexo);
-		System.out.println("Experiência: " + experiencia);
+				
+		 usuario.setIdRole(2);
+				
+		System.out.println("\nNome: " + usuario.getNome());
+		System.out.println("Sobrenome: " + usuario.getSobrenome());
+		System.out.println("Estado: " + usuario.getEstado());
+		System.out.println("Cidade: " + usuario.getCidade());		
+		System.out.println("Experiência: " + usuario.getExperiencia());
+		System.out.println("Sexo: " + usuario.getSexo());
+		System.out.println("Id_Role: " + usuario.getIdRole());
 		System.out.println("\n");
-		
-		List<Usuario> listaFuncionario = this.usuarioRepository.consultarParametro(nome,
-																				   sobrenome,
-																				   estado,
-																				   cidade,
-																				   sexo,
-																				   experiencia);
+				
+		 List<Usuario> listaFuncionario =  this.usuarioRepository.consultarParametro(
+					usuario.getNome(),
+					usuario.getSobrenome()
+					);
+				 
 		
 		System.out.println(listaFuncionario);
 		
@@ -183,7 +188,7 @@ public class UsuarioController {
 		try {
 			usuario = this.usuarioRepository.encontrarLogin(login, senha);
 			if (usuario != null) {				
-				return new Response(1, "Seja Bem-vindo.", usuario.getId_role());
+				return new Response(1, "Seja Bem-vindo.", usuario.getIdRole());
 			} else {
 				System.out.println(usuario);
 				return new Response(0, "Usuário não encontrado", 0);
@@ -210,10 +215,12 @@ public class UsuarioController {
 	  try { usuarioRepository.delete(usuario);
 	  
 	  return new Response(1, "Registro excluído com sucesso.",
-	  usuario.getId_role());
+	  usuario.getIdRole());
 	  
 	  } catch (Exception e) { return new Response(0, e.getMessage(),
-	  usuario.getId_role()); } }
+	  usuario.getIdRole()); 
+	  	}
+	  }
 	 
 
 }

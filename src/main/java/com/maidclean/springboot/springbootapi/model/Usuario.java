@@ -23,72 +23,72 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Usuario implements UserDetails, Serializable{
 
 	private static final long serialVersionUID = -2606442091344673140L;		
-		
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_usuario")
 	private Long id_usuario;
-		
+
 	@Column(name="ds_login")
 	private String login;
-	
+
 	@Column(name="ds_senha")
 	private String senha;
-	
+
 	@Column(name="ds_nome")
 	private String nome;
-	
+
 	@Column(name="ds_sobrenome")
 	private String sobrenome;	
-	
+
 	@Column(name="ds_cpf_cnpj")
 	private String cpf_cnpj;
-	
+
 	@Column(name="ds_facebook")
 	private String facebook;
 
 	@Column(name="ds_has_Whatsapp")
 	private String hasWhatsapp;
-	
+
 	@Column(name="ds_telefone")
 	private String telefone;
-	
+
 	@Column(name="ds_profissao")
 	private String profissao;
-	
+
 	@Column(name="ds_experiencia")
 	private String experiencia;
-	
+
 	@Column(name="ds_endereco")
 	private String endereco;
-	
+
 	@Column(name="ds_complemento")
 	private String complemento;
-	
+
 	@Column(name="ds_cidade")
 	private String cidade;
-	
+
 	@Column(name="ds_Estado")
 	private String estado;
-	
+
 	@Column(name="ds_cep")
 	private String cep;
-	
+
 	@Column(name="ds_sexo")
 	private String sexo;
-	
+
 	@Column(name="ds_avaliacao")
 	private String avaliacao;
-	
+
 	@Column(name="ds_residencia")
 	private String residencia;
-		
+
 	@Column(name="id_role")
-	private int id_role;	
-	
+	private int idRole;	
+
 	@Column(name="ds_email")
 	private String email;
-	
+
 	public String getLogin() {
 		return login;
 	}
@@ -249,8 +249,12 @@ public class Usuario implements UserDetails, Serializable{
 		return id_usuario;
 	}
 
-	public int getId_role() {
-		return id_role;
+	public int getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
 	@Override
@@ -260,10 +264,8 @@ public class Usuario implements UserDetails, Serializable{
 				+ hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao + ", experiencia=" + experiencia
 				+ ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade + ", estado="
 				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao=" + avaliacao + ", residencia=" + residencia
-				+ ", id_role=" + id_role + ", email=" + email + "]";
+				+ ", idRole=" + idRole + ", email=" + email + "]";
 	}
-
-	
 
 	@Override
 	public int hashCode() {
@@ -280,7 +282,7 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
 		result = prime * result + ((facebook == null) ? 0 : facebook.hashCode());
 		result = prime * result + ((hasWhatsapp == null) ? 0 : hasWhatsapp.hashCode());
-		result = prime * result + id_role;
+		result = prime * result + idRole;
 		result = prime * result + ((id_usuario == null) ? 0 : id_usuario.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -357,7 +359,7 @@ public class Usuario implements UserDetails, Serializable{
 				return false;
 		} else if (!hasWhatsapp.equals(other.hasWhatsapp))
 			return false;
-		if (id_role != other.id_role)
+		if (idRole != other.idRole)
 			return false;
 		if (id_usuario == null) {
 			if (other.id_usuario != null)
@@ -448,5 +450,5 @@ public class Usuario implements UserDetails, Serializable{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 }

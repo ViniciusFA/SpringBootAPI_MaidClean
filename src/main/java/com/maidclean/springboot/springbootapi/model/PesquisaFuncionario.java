@@ -1,51 +1,74 @@
 package com.maidclean.springboot.springbootapi.model;
 
+import java.util.Optional;
+
 public class PesquisaFuncionario {
 
-	private String nome;
-	private String sobrenome;
-	private String estado;
-	private String cidade;
-	private String sexo;
-	private String experiencia;
+	private Optional<String> nome;
+	private Optional<String> sobrenome;
+	private Optional<String> estado;
+	private Optional<String> cidade;
+	private Optional<String> sexo;
+	private Optional<String> experiencia;
+	private int idRole;
 	
 	public PesquisaFuncionario() {}
-	
-	public String getNome() {
+
+	public Optional<String> getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
+
+	public void setNome(Optional<String> nome) {
 		this.nome = nome;
 	}
-	public String getSobrenome() {
+
+	public Optional<String> getSobrenome() {
 		return sobrenome;
 	}
-	public void setSobrenome(String sobrenome) {
+
+	public void setSobrenome(Optional<String> sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public String getEstado() {
+
+	public Optional<String> getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+
+	public void setEstado(Optional<String> estado) {
 		this.estado = estado;
 	}
-	public String getCidade() {
+
+	public Optional<String> getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
+
+	public void setCidade(Optional<String> cidade) {
 		this.cidade = cidade;
 	}
-	public String getSexo() {
+
+	public Optional<String> getSexo() {
 		return sexo;
 	}
-	public void setSexo(String sexo) {
+
+	public void setSexo(Optional<String> sexo) {
 		this.sexo = sexo;
 	}
-	public String getExperiencia() {
+
+	public Optional<String> getExperiencia() {
 		return experiencia;
 	}
-	public void setExperiencia(String experiencia) {
+
+	public void setExperiencia(Optional<String> experiencia) {
 		this.experiencia = experiencia;
+	}
+	
+
+	public int getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(int idRole) {
+		this.idRole = idRole;
 	}
 
 	@Override
@@ -60,16 +83,7 @@ public class PesquisaFuncionario {
 		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
 		return result;
 	}
-	
-	
 
-	@Override
-	public String toString() {
-		return "PesquisaFuncionario [nome=" + nome + ", sobrenome=" + sobrenome + ", estado=" + estado + ", cidade="
-				+ cidade + ", sexo=" + sexo + ", experiencia=" + experiencia + "]";
-	}
-
-	//HashCode e Equals dos atributos
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -111,7 +125,11 @@ public class PesquisaFuncionario {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PesquisaFuncionario [nome=" + nome + ", sobrenome=" + sobrenome + ", estado=" + estado + ", cidade="
+				+ cidade + ", sexo=" + sexo + ", experiencia=" + experiencia + "]";
+	}
 	
 }

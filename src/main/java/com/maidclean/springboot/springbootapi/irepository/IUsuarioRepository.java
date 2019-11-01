@@ -18,11 +18,11 @@ import com.maidclean.springboot.springbootapi.model.Usuario;
 public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByExampleExecutor<Usuario>{
 		
 	  void save(Usuario pessoa);
-		 
+	  		 
 	  void delete(Usuario usuario);
 	 
 	  List<Usuario> findAll();
-	  
+	  	  
 	  List<Usuario> findByIdRole(int idRole);
 	 
 	  Usuario findById(Long id);	
@@ -32,9 +32,7 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  
 	  @Query("SELECT u FROM Usuario u where u.login =:login and u.senha =:senha")
 	  Usuario encontrarLogin(String login, String senha);
-	 
-	  List findAll(String nome, String sobrenome);
-	  
+	 	  
 	  @Query("Select u from Usuario u where "
 	  		+ "(ds_nome is null or ds_nome = :nome) "
 	  		+ "and (ds_sobrenome is null or ds_sobrenome = :sobrenome) "	
@@ -49,7 +47,6 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 			  			@Param(value = "sexo") String sexo,
 			  			@Param(value = "experiencia") String experiencia,
 			  			@Param(value = "idRole") int idRole*/
-			  			);					
-	 
+			  			);		
 	  		
 }

@@ -13,7 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Example;
+import org.springframework.data.domain.Example;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
@@ -34,7 +34,6 @@ import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
-import springbootapi.irepositorio.repositoryImpl.IUsuarioRepositoryQuery;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -51,17 +50,17 @@ public class UsuarioController {
 		this.usuarioRepository = usuarioRepository;
 	}
 
-	/*	*//**
+			/**
 			 * BUSCAR UMA PESSOA PELO CÓDIGO
 			 * 
 			 * @param codigo
 			 * @return
 			 */
-				  @RequestMapping(value = "/usuario/{login}", params= {"login"}, method =
-				  RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-				  public @ResponseBody Usuario buscar(@RequestParam("login") String login) {
-				  System.out.println(login); return this.usuarioRepository.findByLogin(login);
-				  }
+	@RequestMapping(value = "/usuario/{login}", params= {"login"}, method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Usuario buscar(@RequestParam("login") String login) {
+		System.out.println(login); 
+	return this.usuarioRepository.findByLogin(login);
+	 }
 				 
 
 	/**
@@ -72,16 +71,12 @@ public class UsuarioController {
 	 */
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Usuario usuario) {
-
 		try {
 			this.usuarioRepository.save(usuario);
-
 			return new Response(1, "Usuário cadastrado com sucesso.", usuario.getIdRole());
-
 		} catch (Exception e) {
 			return new Response(0, e.getMessage(), usuario.getIdRole());
 		}
-
 	}
 
 	/**
@@ -115,11 +110,9 @@ public class UsuarioController {
 	/**
 	 * BUSCAR UM USUÁRIO PELO PERFIL
 	 * 
-	 * @param id_role
+	 * @param idRole
 	 * @return
-	 */
-
-	
+	 */	
 	  @RequestMapping(value = "/usuario", params= {"idRole"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	  public @ResponseBody List<Usuario> buscarUsuarioPorPerfil(@RequestParam("idRole") int idRole) { 
 	  
@@ -129,14 +122,18 @@ public class UsuarioController {
 	  }
 	 
 
+	/**
+	* BUSCAR UM USUÁRIO COM PARAMETROS DINÂMICOS
+	* 
+	* @param usuario
+	* @return
+	*/	 
 	@RequestMapping(value = "/usuario/listaUsuarios", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody List<Usuario> buscarParam(Usuario usuario) {
-				
+	public @ResponseBody Iterable<Usuario> buscarParam(Usuario usuario) {
+			
+		usuario.setIdRole(2);	
 		
-		
-				
-		 usuario.setIdRole(2);
-				
+		//mostra conteudo dos parametros na tela.		
 		System.out.println("\nNome: " + usuario.getNome());
 		System.out.println("Sobrenome: " + usuario.getSobrenome());
 		System.out.println("Estado: " + usuario.getEstado());
@@ -145,20 +142,20 @@ public class UsuarioController {
 		System.out.println("Sexo: " + usuario.getSexo());
 		System.out.println("Id_Role: " + usuario.getIdRole());
 		System.out.println("\n");
-				
-		 List<Usuario> listaFuncionario =  this.usuarioRepository.consultarParametro(
-					usuario.getNome(),
-					usuario.getSobrenome()
-					);
-				 
 		
+		Example<Usuario> usuarioExample = Example.of(usuario, ExampleMatcher.matchingAll()
+											 			   .withIgnoreNullValues());
+				
+		//lista que receberá todos os usuarios encontrados no banco
+		 Iterable<Usuario> listaFuncionario =  this.usuarioRepository.findAll(usuarioExample);
+			
+		 //iteração para mostrar a lista de funcionarios encontrados no banco
+		 for (Usuario u : listaFuncionario) {
+	          System.out.println("\n"+u);
+	      }
+		 
 		System.out.println(listaFuncionario);
 		
-		System.out.println("\n");
-		for(int i =0;i<listaFuncionario.size();i++) {
-			System.out.println("Funcionario "+ i + " : " + listaFuncionario);
-		}
-		System.out.println("\n");
 		return listaFuncionario;
 	}
 
@@ -167,12 +164,9 @@ public class UsuarioController {
 	 * 
 	 * @param codigo
 	 * @return
-	 */
-	
-	  @RequestMapping(value = "/usuario/{id_usuario}", method = RequestMethod.GET,
-	  produces = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
-	  Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {
-	  
+	 */	
+	  @RequestMapping(value = "/usuario/{id_usuario}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
+	  Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {	  
 	  return this.usuarioRepository.findById(id_usuario); }
 	 
 
@@ -203,22 +197,17 @@ public class UsuarioController {
 	 * 
 	 * @param codigo
 	 * @return
-	 */
-	
+	 */	
 	  @RequestMapping(value = "/usuario/{id_usuario}", method =
 	  RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public @ResponseBody Response excluir(@PathVariable("id_usuario") Long
-	  id_usuario) {
+	  public @ResponseBody Response excluir(@PathVariable("id_usuario") Long id_usuario) {
 	  
-	  Usuario usuario = usuarioRepository.findById(id_usuario);
+	  Usuario usuario = usuarioRepository.findById(id_usuario);	  
+	  try { usuarioRepository.delete(usuario);	  
+	  return new Response(1, "Registro excluído com sucesso.", usuario.getIdRole());
 	  
-	  try { usuarioRepository.delete(usuario);
-	  
-	  return new Response(1, "Registro excluído com sucesso.",
-	  usuario.getIdRole());
-	  
-	  } catch (Exception e) { return new Response(0, e.getMessage(),
-	  usuario.getIdRole()); 
+	  } catch (Exception e) { 
+		  return new Response(0, e.getMessage(),usuario.getIdRole()); 
 	  	}
 	  }
 	 

@@ -7,5 +7,6 @@ import com.maidclean.springboot.springbootapi.model.Vaga;
 public interface IVagaRepository extends Repository<Vaga, Integer>{
 	
 	List<Vaga> findAll();
-
+	
+	void save(Vaga vaga);
 }

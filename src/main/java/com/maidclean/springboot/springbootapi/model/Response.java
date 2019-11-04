@@ -6,8 +6,11 @@ public class Response {
 	private String mensagem;
 	private int id_role;
  
-	public Response() {}
- 
+	public Response(int codigo, String mensagem) {
+		this.codigo = codigo;
+		this.mensagem = mensagem;
+	}
+	
 	public Response(int codigo, String mensagem,int id_role) {
 		this.codigo   = codigo;
 		this.mensagem =  mensagem;

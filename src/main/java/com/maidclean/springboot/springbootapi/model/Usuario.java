@@ -27,7 +27,7 @@ public class Usuario implements UserDetails, Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_usuario")
-	private Long id_usuario;
+	private Long idUsuario;
 
 	@Column(name="ds_login")
 	private String login;
@@ -243,10 +243,10 @@ public class Usuario implements UserDetails, Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Long getId_usuario() {
-		return id_usuario;
+	}	
+	
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
 	public int getIdRole() {
@@ -255,18 +255,18 @@ public class Usuario implements UserDetails, Serializable{
 
 	public void setIdRole(int idRole) {
 		this.idRole = idRole;
-	}
+	}	
 
 	@Override
 	public String toString() {
-		return "Usuario [id_usuario=" + id_usuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
+		return "Usuario [idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
 				+ ", sobrenome=" + sobrenome + ", cpf_cnpj=" + cpf_cnpj + ", facebook=" + facebook + ", hasWhatsapp="
 				+ hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao + ", experiencia=" + experiencia
 				+ ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade + ", estado="
 				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao=" + avaliacao + ", residencia=" + residencia
 				+ ", idRole=" + idRole + ", email=" + email + "]";
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -283,7 +283,7 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((facebook == null) ? 0 : facebook.hashCode());
 		result = prime * result + ((hasWhatsapp == null) ? 0 : hasWhatsapp.hashCode());
 		result = prime * result + idRole;
-		result = prime * result + ((id_usuario == null) ? 0 : id_usuario.hashCode());
+		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
@@ -361,10 +361,10 @@ public class Usuario implements UserDetails, Serializable{
 			return false;
 		if (idRole != other.idRole)
 			return false;
-		if (id_usuario == null) {
-			if (other.id_usuario != null)
+		if (idUsuario == null) {
+			if (other.idUsuario != null)
 				return false;
-		} else if (!id_usuario.equals(other.id_usuario))
+		} else if (!idUsuario.equals(other.idUsuario))
 			return false;
 		if (login == null) {
 			if (other.login != null)

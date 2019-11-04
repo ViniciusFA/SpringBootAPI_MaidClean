@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
-import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
@@ -167,7 +166,8 @@ public class UsuarioController {
 	 */	
 	  @RequestMapping(value = "/usuario/{id_usuario}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
 	  Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {	  
-	  return this.usuarioRepository.findById(id_usuario); }
+	  return this.usuarioRepository.findByIdUsuario(id_usuario); 
+	  }
 	 
 
 	/**
@@ -202,7 +202,7 @@ public class UsuarioController {
 	  RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	  public @ResponseBody Response excluir(@PathVariable("id_usuario") Long id_usuario) {
 	  
-	  Usuario usuario = usuarioRepository.findById(id_usuario);	  
+	  Usuario usuario = usuarioRepository.findByIdUsuario(id_usuario);	  
 	  try { usuarioRepository.delete(usuario);	  
 	  return new Response(1, "Registro excluído com sucesso.", usuario.getIdRole());
 	  

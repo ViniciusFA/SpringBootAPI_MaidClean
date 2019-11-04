@@ -22,11 +22,11 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  void delete(Usuario usuario);
 	 
 	  List<Usuario> findAll();
+	  
+	  Usuario findByIdUsuario(Long idUsuario);
 	  	  
 	  List<Usuario> findByIdRole(int idRole);
 	 
-	  Usuario findById(Long id);	
-		
 	  @Query(value = "SELECT * FROM tb_usuarios u where u.ds_login = :login", nativeQuery = true)
 	  Usuario findByLogin(String login);
 	  

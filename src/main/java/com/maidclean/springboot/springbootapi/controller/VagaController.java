@@ -3,6 +3,8 @@ package com.maidclean.springboot.springbootapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maidclean.springboot.springbootapi.irepository.IVagaRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
 import com.maidclean.springboot.springbootapi.model.Response;
+import com.maidclean.springboot.springbootapi.model.Usuario;
 import com.maidclean.springboot.springbootapi.model.Vaga;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -52,6 +55,38 @@ public class VagaController {
 		}catch(Exception e ) {
 			return new Response(0, e.getMessage());			
 		} 
+	}
+	
+
+	/**
+	* BUSCAR UMA VAGA COM PARAMETROS DINÂMICOS
+	* 
+	* @param vaga
+	* @return
+	*/	 
+	@RequestMapping(value="/vagas/listaVagas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Iterable<Vaga> pesquisarVaga(Vaga vaga){
+		//vaga.setId_vaga();
+		System.out.println("Nome Emrpegador: " + vaga.getNomeEmpregador());
+		System.out.println("Título:" + vaga.getTitulo());
+		System.out.println("Subtítulo:" + vaga.getSubtitulo());
+		System.out.println("Cidade:" + vaga.getCidade());
+		System.out.println("Estado:" + vaga.getEstado());
+		
+		Example<Vaga> vagaExample = Example.of(vaga, ExampleMatcher.matchingAll()
+													.withIgnoreNullValues()
+													.withIgnorePaths("id_vaga"));
+		
+		Iterable<Vaga> retornoVagas = this.vagaRepository.findAll(vagaExample);
+		
+		//iteração para mostrar a lista de funcionarios encontrados no banco
+		 for (Vaga v : retornoVagas) {
+	          System.out.println("\n"+v);
+	      }
+		 
+		System.out.println(retornoVagas);
+		
+		return retornoVagas;
 	}
 	
 }

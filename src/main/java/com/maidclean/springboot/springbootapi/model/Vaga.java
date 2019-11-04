@@ -98,6 +98,10 @@ public class Vaga implements Serializable{
 	
 	
 
+	public void setId_vaga(int id_vaga) {
+		this.id_vaga = id_vaga;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

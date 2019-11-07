@@ -67,24 +67,43 @@ public class VagaController {
 	@RequestMapping(value="/vagas/listaVagas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Iterable<Vaga> pesquisarVaga(Vaga vaga){
 		//vaga.setId_vaga();
-		System.out.println("Nome Emrpegador: " + vaga.getNomeEmpregador());
-		System.out.println("Título:" + vaga.getTitulo());
-		System.out.println("Subtítulo:" + vaga.getSubtitulo());
-		System.out.println("Cidade:" + vaga.getCidade());
-		System.out.println("Estado:" + vaga.getEstado());
+		/*
+		 * System.out.println("Nome Empregador: " + vaga.getNomeEmpregador());
+		 * System.out.println("Título:" + vaga.getTitulo());
+		 * System.out.println("Subtítulo:" + vaga.getSubtitulo());
+		 * System.out.println("Cidade:" + vaga.getCidade());
+		 * System.out.println("Estado:" + vaga.getEstado());
+		 */
+		
+		//se vierem campos vazios jogamos para nulo para o ExampleMatcher ignorá-los e não pesquisar no Banco.
+		if(vaga.getNomeEmpregador() == null || vaga.getNomeEmpregador() == null || vaga.getNomeEmpregador().isEmpty()) {
+			vaga.setNomeEmpregador(null);
+		}
+		if(vaga.getTitulo() == null || vaga.getTitulo() == null || vaga.getTitulo().isEmpty()) {
+			vaga.setTitulo(null);
+		}
+		if(vaga.getSubtitulo() == null || vaga.getSubtitulo() == null || vaga.getSubtitulo().isEmpty()) {
+			vaga.setSubtitulo(null);
+		}
+		if(vaga.getEstado() == null || vaga.getEstado() == null || vaga.getEstado().isEmpty()) {
+			vaga.setEstado(null);
+		}
+		if(vaga.getCidade() == null || vaga.getCidade() == null || vaga.getCidade().isEmpty()) {
+			vaga.setCidade(null);
+		}
 		
 		Example<Vaga> vagaExample = Example.of(vaga, ExampleMatcher.matchingAll()
 													.withIgnoreNullValues()
-													.withIgnorePaths("id_vaga"));
+													.withIgnorePaths("id_vaga")
+													.withIgnoreNullValues());
 		
 		Iterable<Vaga> retornoVagas = this.vagaRepository.findAll(vagaExample);
 		
 		//iteração para mostrar a lista de funcionarios encontrados no banco
 		 for (Vaga v : retornoVagas) {
-	          System.out.println("\n"+v);
-	      }
-		 
-		System.out.println(retornoVagas);
+			 System.out.println("\nUsuário encontrado:");
+	          System.out.println(""+ v +"\n");
+	      }		
 		
 		return retornoVagas;
 	}

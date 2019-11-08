@@ -70,9 +70,16 @@ public class UsuarioController {
 	 */
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Usuario usuario) {
+		
 		try {
 			this.usuarioRepository.save(usuario);
-			return new Response(1, "Usuário cadastrado com sucesso.", usuario.getIdRole());
+			if(usuario.getIdRole() == 3) {
+				return new Response(1, "Empregador cadastrado com sucesso.", usuario.getIdRole());
+			}else if(usuario.getIdRole() == 2) {
+				return new Response(1, "Funcionário cadastrado com sucesso.", usuario.getIdRole());
+			}else {
+				return new Response(1, "Administrador cadastrado com sucesso.", usuario.getIdRole());
+			}			
 		} catch (Exception e) {
 			return new Response(0, e.getMessage(), usuario.getIdRole());
 		}
@@ -131,16 +138,32 @@ public class UsuarioController {
 	public @ResponseBody Iterable<Usuario> buscarParam(Usuario usuario) {
 			
 		usuario.setIdRole(2);	
+				
+		if(usuario.getNome() == "" || usuario.getNome().isEmpty() ) {
+			usuario.setNome(null);
+		}
+		if(usuario.getSobrenome() == "" || usuario.getSobrenome().isEmpty() ) {
+			usuario.setSobrenome(null);		
+		}
+		if(usuario.getEstado() == "" || usuario.getEstado().isEmpty() ) {
+			usuario.setEstado(null);
+		}
+		if(usuario.getCidade() == "" || usuario.getCidade().isEmpty()) {
+			usuario.setCidade(null);
+		}
+		if(usuario.getSexo() == "" || usuario.getSexo().isEmpty()) {
+			usuario.setSexo(null);
+		}
+		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty()) {
+			usuario.setExperiencia(null);
+		}
 		
-		//mostra conteudo dos parametros na tela.		
-		System.out.println("\nNome: " + usuario.getNome());
-		System.out.println("Sobrenome: " + usuario.getSobrenome());
-		System.out.println("Estado: " + usuario.getEstado());
-		System.out.println("Cidade: " + usuario.getCidade());		
-		System.out.println("Experiência: " + usuario.getExperiencia());
-		System.out.println("Sexo: " + usuario.getSexo());
-		System.out.println("Id_Role: " + usuario.getIdRole());
-		System.out.println("\n");
+		System.out.println(usuario.getNome());
+		System.out.println(usuario.getSobrenome());
+		System.out.println(usuario.getCidade());
+		System.out.println(usuario.getEstado());
+		System.out.println(usuario.getSexo());
+		System.out.println(usuario.getExperiencia());
 		
 		Example<Usuario> usuarioExample = Example.of(usuario, ExampleMatcher.matchingAll()
 											 			   .withIgnoreNullValues());
@@ -171,7 +194,7 @@ public class UsuarioController {
 	 
 
 	/**
-	 * BUSCAR UM USUÁRIO PELO USUÁRIO E SENHA
+	 * LOGAR UM USUÁRIO PELO USUÁRIO E SENHA
 	 * 
 	 * @param login and senha
 	 * @return
@@ -181,7 +204,8 @@ public class UsuarioController {
 										@PathVariable("senha") String senha) {
 		try {
 			usuario = this.usuarioRepository.encontrarLogin(login, senha);
-			if (usuario != null) {				
+			if (usuario != null) {	
+				System.out.println(usuario.getIdRole());
 				return new Response(1, "Seja Bem-vindo.", usuario.getIdRole());
 			} else {
 				System.out.println(usuario);

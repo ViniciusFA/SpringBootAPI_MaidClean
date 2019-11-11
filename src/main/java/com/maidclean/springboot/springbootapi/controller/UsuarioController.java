@@ -139,22 +139,22 @@ public class UsuarioController {
 			
 		usuario.setIdRole(2);	
 				
-		if(usuario.getNome() == "" || usuario.getNome().isEmpty() ) {
+		if(usuario.getNome() == "" || usuario.getNome().isEmpty()) {
 			usuario.setNome(null);
 		}
 		if(usuario.getSobrenome() == "" || usuario.getSobrenome().isEmpty() ) {
 			usuario.setSobrenome(null);		
 		}
-		if(usuario.getEstado() == "" || usuario.getEstado().isEmpty() ) {
+		if(usuario.getEstado() == "" || usuario.getEstado().isEmpty() || usuario.getEstado().equals("Selecione")) {
 			usuario.setEstado(null);
 		}
 		if(usuario.getCidade() == "" || usuario.getCidade().isEmpty()) {
 			usuario.setCidade(null);
 		}
-		if(usuario.getSexo() == "" || usuario.getSexo().isEmpty()) {
+		if(usuario.getSexo() == "" || usuario.getSexo().isEmpty() || usuario.getSexo().equals("Selecione")) {
 			usuario.setSexo(null);
 		}
-		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty()) {
+		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty() || usuario.getExperiencia().equals("Selecione")) {
 			usuario.setExperiencia(null);
 		}
 		

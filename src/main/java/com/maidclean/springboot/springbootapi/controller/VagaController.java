@@ -68,19 +68,19 @@ public class VagaController {
 	public @ResponseBody Iterable<Vaga> pesquisarVaga(Vaga vaga){
 	
 		//se vierem campos vazios jogamos para nulo para o ExampleMatcher ignorá-los e não pesquisar no Banco.
-		if(vaga.getNomeEmpregador() == null || vaga.getNomeEmpregador().isEmpty()) {
+		if(vaga.getNomeEmpregador().isEmpty() || vaga.getNomeEmpregador() == "") {
 			vaga.setNomeEmpregador(null);
 		}
-		if(vaga.getTitulo() == null || vaga.getTitulo().isEmpty()) {
+		if(vaga.getTitulo().isEmpty() || vaga.getTitulo() == "") {
 			vaga.setTitulo(null);
 		}
-		if(vaga.getSubtitulo() == null || vaga.getSubtitulo().isEmpty()) {
+		if(vaga.getSubtitulo().isEmpty() || vaga.getSubtitulo() == "") {
 			vaga.setSubtitulo(null);
 		}
-		if(vaga.getEstado() == null || vaga.getEstado().isEmpty()) {
+		if(vaga.getEstado().isEmpty() || vaga.getEstado() == "" || vaga.getEstado().equals("Selecione")) {
 			vaga.setEstado(null);
 		}
-		if(vaga.getCidade() == null || vaga.getCidade().isEmpty()) {
+		if(vaga.getCidade().isEmpty() || vaga.getCidade() == "") {
 			vaga.setCidade(null);
 		}
 		

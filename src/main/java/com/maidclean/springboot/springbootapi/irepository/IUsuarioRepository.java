@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.lang.Nullable;
 
 import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
+import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
 
@@ -26,6 +27,9 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  Usuario findByIdUsuario(Long idUsuario);
 	  	  
 	  List<Usuario> findByIdRole(int idRole);
+	  
+	 // @Query(value="SELECT * FROM tb_usuarios u where u.ds_email =: email", nativeQuery = true)
+	  Response findByEmail(String email);
 	 
 	  @Query(value = "SELECT * FROM tb_usuarios u where u.ds_login = :login", nativeQuery = true)
 	  Usuario findByLogin(String login);

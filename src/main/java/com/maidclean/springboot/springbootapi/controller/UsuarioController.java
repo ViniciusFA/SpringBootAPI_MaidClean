@@ -227,13 +227,32 @@ public class UsuarioController {
 	  public @ResponseBody Response excluir(@PathVariable("id_usuario") Long id_usuario) {
 	  
 	  Usuario usuario = usuarioRepository.findByIdUsuario(id_usuario);	  
-	  try { usuarioRepository.delete(usuario);	  
-	  return new Response(1, "Registro excluído com sucesso.", usuario.getIdRole());
+	  try { 
+		  usuarioRepository.delete(usuario);	  
+		  return new Response(1, "Registro excluído com sucesso.", usuario.getIdRole());
 	  
-	  } catch (Exception e) { 
+	  }catch (Exception e) { 
 		  return new Response(0, e.getMessage(),usuario.getIdRole()); 
 	  	}
 	  }
+	  
+	  /**
+		 * BUSCAR UM USUÁRIO PELO EMAIL
+		 * 
+		 * @param email
+		 * @return
+		 */	  
+	  	@RequestMapping(value="/usuario/{email}", method = RequestMethod.GET
+	  			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		  public @ResponseBody Response redefinirPassword(@PathVariable("email") String email) {
+			  try {
+				  usuarioRepository.findByEmail(email);
+				  return new Response(1, "Verifique o seu email.", usuario.getIdRole());
+			  }catch (Exception e) {
+				  return new Response(0, e.getMessage(),usuario.getIdRole()); 
+				  
+			  }
+		  }
 	 
 
 }

@@ -28,8 +28,8 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  	  
 	  List<Usuario> findByIdRole(int idRole);
 	  
-	 // @Query(value="SELECT * FROM tb_usuarios u where u.ds_email =: email", nativeQuery = true)
-	  Response findByEmail(String email);
+	  @Query(value="SELECT * FROM tb_usuarios u where u.ds_email =:email", nativeQuery = true)
+	  Usuario encontrarEmail(String email);
 	 
 	  @Query(value = "SELECT * FROM tb_usuarios u where u.ds_login = :login", nativeQuery = true)
 	  Usuario findByLogin(String login);

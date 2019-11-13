@@ -242,17 +242,19 @@ public class UsuarioController {
 		 * @param email
 		 * @return
 		 */	  
-	  	@RequestMapping(value="/usuario/{email}", method = RequestMethod.GET
+	  	@RequestMapping(value="/usuario/email/{email}", method = RequestMethod.GET
 	  			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 		  public @ResponseBody Response redefinirPassword(@PathVariable("email") String email) {
-			  try {
-				  usuarioRepository.findByEmail(email);
-				  return new Response(1, "Verifique o seu email.", usuario.getIdRole());
-			  }catch (Exception e) {
-				  return new Response(0, e.getMessage(),usuario.getIdRole()); 
-				  
-			  }
+	  		try {
+	  			usuario = this.usuarioRepository.encontrarEmail(email);		
+	  			if(usuario != null) {
+					return new Response(1,"Verifique o email.");	
+				}else {
+					return new Response(0,"Email não encontrado.\nInsira um email válido.");						
+				}
+	  		}catch(Exception e) {
+	  			return new Response(0,e.getMessage());			
+	  		}	
 		  }
-	 
 
 }

@@ -6,5 +6,5 @@ import com.maidclean.springboot.springbootapi.model.Usuario;
 
 public interface UsuarioRepositoryQuery {
 
-	Iterable<Usuario> findUsuarioWithParameters(Usuario usuarioParametros);	
+	/* Iterable<Usuario> findUsuarioWithParameters(Usuario usuarioParametros); */
 }

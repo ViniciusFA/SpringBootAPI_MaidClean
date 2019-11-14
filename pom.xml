@@ -98,6 +98,13 @@
 			 <groupId>org.springframework.boot</groupId>
 			 <artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.icegreen/greenmail -->
+		<dependency>
+		    <groupId>com.icegreen</groupId>
+		    <artifactId>greenmail</artifactId>
+		    <version>1.5.0</version>
+		    <scope>test</scope>
+		</dependency>
 	</dependencies>
 	
 

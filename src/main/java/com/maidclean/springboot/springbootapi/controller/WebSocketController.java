@@ -25,10 +25,11 @@ public class WebSocketController {
 	}
 	
 	@MessageMapping("send/message")
-	public void onReceivedMessage(String message) {
+	public void onReceivedMessage(String message,String user) {
 		arrumarHora(horaAtualString);
+		
 		this.template.convertAndSend("/chat",horaAtualString+ "- "+message);			
-		System.out.println(horaAtualString+ "- "+message);	
+		System.out.println(horaAtualString+ " - "+message);	
 	}
 	
 	//Arruma a hora devido o horario de verão que não aconteceu ese ano/2019 no Brasil
@@ -63,6 +64,7 @@ public class WebSocketController {
 			SegundosString = Integer.toString(segundos);
 		}
 		
+		//concatena a hora,minutos e segundos em uma variavel só
 		horaAtual = HoraString + ":" + MinutosString + ":" + SegundosString;				
 		horaAtualString = horaAtual;		
 	}

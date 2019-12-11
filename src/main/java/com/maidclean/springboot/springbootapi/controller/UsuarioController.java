@@ -151,8 +151,8 @@ public class UsuarioController {
 		if(usuario.getCidade() == "" || usuario.getCidade().isEmpty()) {
 			usuario.setCidade(null);
 		}
-		if(usuario.getSexo() == "" || usuario.getSexo().isEmpty() || usuario.getSexo().equals("Selecione")) {
-			usuario.setSexo(null);
+		if(usuario.getAvaliacao() == "" || usuario.getAvaliacao().isEmpty() || usuario.getAvaliacao() == null ||usuario.getAvaliacao().equals("Selecione")) {
+			usuario.setAvaliacao(null);
 		}
 		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty() || usuario.getExperiencia().equals("Selecione")) {
 			usuario.setExperiencia(null);
@@ -162,7 +162,7 @@ public class UsuarioController {
 		System.out.println(usuario.getSobrenome());
 		System.out.println(usuario.getCidade());
 		System.out.println(usuario.getEstado());
-		System.out.println(usuario.getSexo());
+		System.out.println(usuario.getAvaliacao());
 		System.out.println(usuario.getExperiencia());
 		
 		Example<Usuario> usuarioExample = Example.of(usuario, ExampleMatcher.matchingAll()
@@ -199,7 +199,7 @@ public class UsuarioController {
 	 * @param login and senha
 	 * @return
 	 */
-	@RequestMapping(value = "/usuario/login/senha/{login}/{senha}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/usuario/{login}/{senha}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response login(@PathVariable("login") String login, 
 										@PathVariable("senha") String senha) {
 		try {

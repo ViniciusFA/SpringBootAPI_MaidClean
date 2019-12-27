@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
+import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
@@ -256,5 +257,28 @@ public class UsuarioController {
 	  			return new Response(0,e.getMessage());			
 	  		}	
 		  }
+	  	/**
+		 * BUSCAR UM USUÁRIO PELO EMAIL
+		 * 
+		 * @param email
+		 * @return
+		 */	  
+	  	@RequestMapping(value="/usuario/avaliacoes/{id_usuario}", method = RequestMethod.GET
+	  			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	  	public @ResponseBody Response getRatingUser(@PathVariable("id_usuario") int id_usuario) {
+	  		try {
+	  			Object object = new Avaliacoes();
+	  			
+	  			object = usuarioRepository.getRatingUser(id_usuario);	  	  			
+	  			
+	  			if(object != null) {
+	  				return new Response(1, "Avaliações encontradas.");
+	  			}else {
+	  				return new Response (0, "Avaliações não encontradas.");
+	  			}
+	  		}catch(Exception e) {
+	  			return new Response(0, e.getMessage());
+	  		}
+	  	}
 
 }

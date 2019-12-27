@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.lang.Nullable;
 
+import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
@@ -31,8 +32,11 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  @Query(value="SELECT * FROM tb_usuarios u where u.ds_email =:email", nativeQuery = true)
 	  Usuario encontrarEmail(String email);
 	 
-	  @Query(value = "SELECT * FROM tb_usuarios u where u.ds_login = :login", nativeQuery = true)
+	  @Query(value = "SELECT * FROM tb_usuarios u where u.ds_login =:login", nativeQuery = true)
 	  Usuario findByLogin(String login);
+	  
+	  @Query(value="SELECT * FROM tb_avaliacoes a where a.id_usuario =:id_usuario", nativeQuery = true)
+	  Object getRatingUser(int id_usuario);
 	  
 	  @Query("SELECT u FROM Usuario u where u.login =:login and u.senha =:senha")
 	  Usuario encontrarLogin(String login, String senha);

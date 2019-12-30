@@ -36,7 +36,7 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  Usuario findByLogin(String login);
 	  
 	  @Query(value="SELECT * FROM tb_avaliacoes a where a.id_usuario =:id_usuario", nativeQuery = true)
-	  Object getRatingUser(int id_usuario);
+	  Avaliacoes getRatingUser(int id_usuario);
 	  
 	  @Query("SELECT u FROM Usuario u where u.login =:login and u.senha =:senha")
 	  Usuario encontrarLogin(String login, String senha);

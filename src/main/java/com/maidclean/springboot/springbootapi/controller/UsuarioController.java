@@ -1,25 +1,12 @@
 package com.maidclean.springboot.springbootapi.controller;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.springframework.data.domain.Example;
-import org.hibernate.criterion.MatchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
-import com.maidclean.springboot.springbootapi.model.Funcionario;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
@@ -257,28 +243,5 @@ public class UsuarioController {
 	  			return new Response(0,e.getMessage());			
 	  		}	
 		  }
-	  	/**
-		 * BUSCAR UM USUÁRIO PELO EMAIL
-		 * 
-		 * @param email
-		 * @return
-		 */	  
-	  	@RequestMapping(value="/usuario/avaliacoes/{id_usuario}", method = RequestMethod.GET
-	  			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  	public @ResponseBody Response getRatingUser(@PathVariable("id_usuario") int id_usuario) {
-	  		try {
-	  			Object object = new Avaliacoes();
-	  			
-	  			object = usuarioRepository.getRatingUser(id_usuario);	  	  			
-	  			
-	  			if(object != null) {
-	  				return new Response(1, "Avaliações encontradas.");
-	  			}else {
-	  				return new Response (0, "Avaliações não encontradas.");
-	  			}
-	  		}catch(Exception e) {
-	  			return new Response(0, e.getMessage());
-	  		}
-	  	}
 
 }

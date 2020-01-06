@@ -36,6 +36,8 @@ public class VagaController {
 	@RequestMapping(value = "/vagas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody List<Vaga> consultar() {
 	
+		//get to name in tb_usuarios with foreign key id_usuario
+		
 		return this.vagaRepository.findAll();
 	}
 	
@@ -68,9 +70,10 @@ public class VagaController {
 	public @ResponseBody Iterable<Vaga> pesquisarVaga(Vaga vaga){
 	
 		//se vierem campos vazios jogamos para nulo para o ExampleMatcher ignorá-los e não pesquisar no Banco.
-		if(vaga.getNomeEmpregador().isEmpty() || vaga.getNomeEmpregador() == "") {
-			vaga.setNomeEmpregador(null);
-		}
+		/*
+		 * if(vaga.getNomeEmpregador().isEmpty() || vaga.getNomeEmpregador() == "") {
+		 * vaga.setNomeEmpregador(null); }
+		 */
 		if(vaga.getTitulo().isEmpty() || vaga.getTitulo() == "") {
 			vaga.setTitulo(null);
 		}

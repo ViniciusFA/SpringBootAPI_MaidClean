@@ -1,5 +1,6 @@
 package com.maidclean.springboot.springbootapi.irepository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
@@ -13,4 +14,5 @@ public interface IVagaRepository extends Repository<Vaga, Integer>, QueryByExamp
 	List<Vaga> findAll();
 	
 	void save(Vaga vaga);
+	
 }

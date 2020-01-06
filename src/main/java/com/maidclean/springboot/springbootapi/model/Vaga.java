@@ -7,38 +7,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="tb_vagas")
-public class Vaga implements Serializable{
-	
+@Table(name = "tb_vagas")
+public class Vaga implements Serializable {
+
 	private static final long serialVersionUID = 161312777442840210L;
-	
-	public Vaga() {}
-	
+
+	public Vaga() {
+	}
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_vaga")	
-	private int id_vaga;
-	
-	@Column(name="ds_titulo")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_vaga")
+	private int id;
+
+	@Column(name = "ds_titulo")
 	private String titulo;
-	
-	@Column(name="ds_subtitulo")
+
+	@Column(name = "ds_subtitulo")
 	private String subtitulo;
-	
-	@Column(name="ds_descricao")
+
+	@Column(name = "ds_descricao")
 	private String descricao;
 	
-	@Column(name="ds_nome_empregador")
+	@Transient
+	private String idEmpregador;
+
+	@Transient
 	private String nomeEmpregador;
-	
-	@Column(name="ds_estado")
+
+	@Column(name = "ds_estado")
 	private String estado;
-	
-	@Column(name="ds_cidade")
+
+	@Column(name = "ds_cidade")
 	private String cidade;
+
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario idUsuario;
 
 	public String getTitulo() {
 		return titulo;
@@ -92,14 +103,25 @@ public class Vaga implements Serializable{
 		return serialVersionUID;
 	}
 
-	public int getId_vaga() {
-		return id_vaga;
-	}
-	
-	
 
-	public void setId_vaga(int id_vaga) {
-		this.id_vaga = id_vaga;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Usuario getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Usuario idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getIdEmpregador() {
+		return idEmpregador;
 	}
 
 	@Override
@@ -109,7 +131,9 @@ public class Vaga implements Serializable{
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + id_vaga;
+		result = prime * result + ((idEmpregador == null) ? 0 : idEmpregador.hashCode());
+		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((nomeEmpregador == null) ? 0 : nomeEmpregador.hashCode());
 		result = prime * result + ((subtitulo == null) ? 0 : subtitulo.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
@@ -140,7 +164,17 @@ public class Vaga implements Serializable{
 				return false;
 		} else if (!estado.equals(other.estado))
 			return false;
-		if (id_vaga != other.id_vaga)
+		if (idEmpregador == null) {
+			if (other.idEmpregador != null)
+				return false;
+		} else if (!idEmpregador.equals(other.idEmpregador))
+			return false;
+		if (idUsuario == null) {
+			if (other.idUsuario != null)
+				return false;
+		} else if (!idUsuario.equals(other.idUsuario))
+			return false;
+		if (id != other.id)
 			return false;
 		if (nomeEmpregador == null) {
 			if (other.nomeEmpregador != null)
@@ -162,8 +196,9 @@ public class Vaga implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Vaga [id_vaga=" + id_vaga + ", titulo=" + titulo + ", subtitulo=" + subtitulo + ", descricao="
-				+ descricao + ", nomeEmpregador=" + nomeEmpregador + ", estado=" + estado + ", cidade=" + cidade + "]";
+		return "Vaga [id_vaga=" + id + ", titulo=" + titulo + ", subtitulo=" + subtitulo + ", descricao="
+				+ descricao + ", idEmpregador=" + idEmpregador + ", nomeEmpregador=" + nomeEmpregador + ", estado="
+				+ estado + ", cidade=" + cidade + ", idUsuario=" + idUsuario + "]";
 	}
-	
+
 }

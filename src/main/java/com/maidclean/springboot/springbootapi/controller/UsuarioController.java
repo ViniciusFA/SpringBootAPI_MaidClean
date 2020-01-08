@@ -237,7 +237,7 @@ public class UsuarioController {
 	  			if(usuario != null) {
 					return new Response(1,"Verifique o email.");	
 				}else {
-					return new Response(0,"Email não encontrado.\nInsira um email válido.");						
+					return new Response(0,"Email não encontrado.");						
 				}
 	  		}catch(Exception e) {
 	  			return new Response(0,e.getMessage());			

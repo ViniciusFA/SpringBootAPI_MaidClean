@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.irepository.IVagaRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
 import com.maidclean.springboot.springbootapi.model.Response;
@@ -26,6 +27,9 @@ public class VagaController {
 
 	@Autowired
 	private IVagaRepository vagaRepository;
+	
+	@Autowired
+	private IUsuarioRepository usuarioRepository;
 	
 	
 	/**
@@ -50,7 +54,9 @@ public class VagaController {
 			consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, 
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Vaga vaga) {
-		System.out.println(vaga);
+		Usuario usuario = new Usuario();
+		usuario = usuarioRepository.findByIdUsuario(Long.parseLong(vaga.getIdEmpregador()));
+		vaga.setIdUsuario(usuario);
 		try {
 			this.vagaRepository.save(vaga);
 			return new Response(1,"Vaga Registrada com sucesso.");

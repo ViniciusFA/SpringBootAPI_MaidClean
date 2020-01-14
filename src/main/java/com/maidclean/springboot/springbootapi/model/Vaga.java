@@ -103,7 +103,6 @@ public class Vaga implements Serializable {
 		return serialVersionUID;
 	}
 
-
 	public int getId() {
 		return id;
 	}

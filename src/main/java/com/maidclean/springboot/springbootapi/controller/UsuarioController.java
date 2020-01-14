@@ -174,8 +174,8 @@ public class UsuarioController {
 	 * @param codigo
 	 * @return
 	 */	
-	  @RequestMapping(value = "/usuario/idUsuario/{id_usuario}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
-	  Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {	  
+	  @RequestMapping(value = "/usuario/idUsuario/{id_usuario}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+	  public @ResponseBody Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {	  
 	  return this.usuarioRepository.findByIdUsuario(id_usuario); 
 	  }
 	 

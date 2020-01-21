@@ -18,7 +18,7 @@ public class Avaliacoes implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_avaliacao")
-	private int idAvaliacao;
+	private Long idAvaliacao;
 	
 	@Column(name="id_usuario")
 	private int idUsuario;
@@ -35,10 +35,16 @@ public class Avaliacoes implements Serializable{
 	@Column(name="vl_limpeza")
 	private float limpeza;
 	
+	@Column(name="vl_media_avaliacao")
+	private double mediaAvaliacao;
+	
+	@Column(name="vl_star")
+	private int star;
+	
 	public int getIdUsuario() {
 		return idUsuario;
 	}		
-	public int getIdAvaliacao() {
+	public Long getIdAvaliacao() {
 		return idAvaliacao;
 	}
 	public void setIdUsuario(int idUsuario) {
@@ -67,17 +73,37 @@ public class Avaliacoes implements Serializable{
 	}	
 	public void setCompromisso(float compromisso) {
 		this.compromisso = compromisso;
+	}	
+	
+	public double getMediaAvaliacao() {
+		return mediaAvaliacao;
 	}
+	public void setMediaAvaliacao(double mediaAvaliacao) {
+		this.mediaAvaliacao = mediaAvaliacao;
+	}	
+	
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Float.floatToIntBits(compromisso);
 		result = prime * result + Float.floatToIntBits(disciplina);
-		result = prime * result + idAvaliacao;
+		result = prime * result + ((idAvaliacao == null) ? 0 : idAvaliacao.hashCode());
 		result = prime * result + idUsuario;
 		result = prime * result + Float.floatToIntBits(limpeza);
+		long temp;
+		temp = Double.doubleToLongBits(mediaAvaliacao);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + Float.floatToIntBits(organizacao);
+		result = prime * result + star;
 		return result;
 	}
 	@Override
@@ -93,20 +119,29 @@ public class Avaliacoes implements Serializable{
 			return false;
 		if (Float.floatToIntBits(disciplina) != Float.floatToIntBits(other.disciplina))
 			return false;
-		if (idAvaliacao != other.idAvaliacao)
+		if (idAvaliacao == null) {
+			if (other.idAvaliacao != null)
+				return false;
+		} else if (!idAvaliacao.equals(other.idAvaliacao))
 			return false;
 		if (idUsuario != other.idUsuario)
 			return false;
 		if (Float.floatToIntBits(limpeza) != Float.floatToIntBits(other.limpeza))
 			return false;
+		if (Double.doubleToLongBits(mediaAvaliacao) != Double.doubleToLongBits(other.mediaAvaliacao))
+			return false;
 		if (Float.floatToIntBits(organizacao) != Float.floatToIntBits(other.organizacao))
+			return false;
+		if (star != other.star)
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
 		return "Avaliacoes [idAvaliacao=" + idAvaliacao + ", idUsuario=" + idUsuario + ", compromisso=" + compromisso
-				+ ", organizacao=" + organizacao + ", disciplina=" + disciplina + ", limpeza=" + limpeza + "]";
+				+ ", organizacao=" + organizacao + ", disciplina=" + disciplina + ", limpeza=" + limpeza
+				+ ", mediaAvaliacao=" + mediaAvaliacao + ", star=" + star + "]";
 	}
+	
 		
 }

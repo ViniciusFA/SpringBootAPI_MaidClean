@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -77,8 +80,9 @@ public class Usuario implements UserDetails, Serializable{
 	@Column(name="ds_sexo")
 	private String sexo;
 
-	@Column(name="ds_avaliacao")
-	private String avaliacao;
+	@ManyToOne
+	@JoinColumn(name="id_avaliacao")
+	private Avaliacoes avaliacao;
 
 	@Column(name="ds_residencia")
 	private String residencia;
@@ -88,7 +92,7 @@ public class Usuario implements UserDetails, Serializable{
 
 	@Column(name="ds_email")
 	private String email;
-
+	
 	public String getLogin() {
 		return login;
 	}
@@ -217,11 +221,11 @@ public class Usuario implements UserDetails, Serializable{
 		this.sexo = sexo;
 	}
 
-	public String getAvaliacao() {
+	public Avaliacoes getAvaliacao() {
 		return avaliacao;
 	}
 
-	public void setAvaliacao(String avaliacao) {
+	public void setAvaliacao(Avaliacoes avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 
@@ -261,7 +265,9 @@ public class Usuario implements UserDetails, Serializable{
 	public void setIdRole(int idRole) {
 		this.idRole = idRole;
 	}	
-
+			
+	
+	
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
@@ -271,7 +277,7 @@ public class Usuario implements UserDetails, Serializable{
 				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao=" + avaliacao + ", residencia=" + residencia
 				+ ", idRole=" + idRole + ", email=" + email + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

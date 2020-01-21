@@ -20,6 +20,8 @@ import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
+import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Definition.Undefined;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -138,7 +140,7 @@ public class UsuarioController {
 		if(usuario.getCidade() == "" || usuario.getCidade().isEmpty()) {
 			usuario.setCidade(null);
 		}
-		if(usuario.getAvaliacao() == "" || usuario.getAvaliacao().isEmpty() || usuario.getAvaliacao() == null ||usuario.getAvaliacao().equals("Selecione")) {
+		if(usuario.getAvaliacao() == null ||usuario.getAvaliacao().equals("Selecione")) {
 			usuario.setAvaliacao(null);
 		}
 		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty() || usuario.getExperiencia().equals("Selecione")) {

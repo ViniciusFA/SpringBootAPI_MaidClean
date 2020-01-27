@@ -6,12 +6,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -59,8 +61,9 @@ public class Usuario implements UserDetails, Serializable{
 	@Column(name="ds_profissao")
 	private String profissao;
 
-	@Column(name="ds_experiencia")
-	private String experiencia;
+	@OneToOne
+	@JoinColumn(name="id_experiencia")
+	private Experiencia experiencia;
 
 	@Column(name="ds_endereco")
 	private String endereco;
@@ -68,27 +71,34 @@ public class Usuario implements UserDetails, Serializable{
 	@Column(name="ds_complemento")
 	private String complemento;
 
-	@Column(name="ds_cidade")
-	private String cidade;
+	@ManyToOne
+	@JoinColumn(name="id_cidade")
+	private Cidade cidade;
 
-	@Column(name="ds_Estado")
-	private String estado;
+	@ManyToOne
+	@JoinColumn(name="id_estado")
+	private Estado estado;
 
 	@Column(name="ds_cep")
 	private String cep;
 
 	@Column(name="ds_sexo")
 	private String sexo;
-
+	
 	@ManyToOne
+	@JoinColumn(name="id_stars")
+	private Estrelas stars;
+
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_avaliacao")
-	private Avaliacoes avaliacao;
+	private List<Avaliacoes> avaliacao;
 
 	@Column(name="ds_residencia")
 	private String residencia;
 
-	@Column(name="id_role")
-	private int idRole;	
+	@OneToOne
+	@JoinColumn(name="id_role")
+	private Role role;	
 
 	@Column(name="ds_email")
 	private String email;
@@ -165,11 +175,11 @@ public class Usuario implements UserDetails, Serializable{
 		this.profissao = profissao;
 	}
 
-	public String getExperiencia() {
+	public Experiencia getExperiencia() {
 		return experiencia;
 	}
 
-	public void setExperiencia(String experiencia) {
+	public void setExperiencia(Experiencia experiencia) {
 		this.experiencia = experiencia;
 	}
 
@@ -189,19 +199,19 @@ public class Usuario implements UserDetails, Serializable{
 		this.complemento = complemento;
 	}
 
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
@@ -221,11 +231,13 @@ public class Usuario implements UserDetails, Serializable{
 		this.sexo = sexo;
 	}
 
-	public Avaliacoes getAvaliacao() {
+	public List<Avaliacoes> getAvaliacao() {
+	//public Avaliacoes getAvaliacao() {	
 		return avaliacao;
 	}
 
-	public void setAvaliacao(Avaliacoes avaliacao) {
+	public void setAvaliacao(List<Avaliacoes> avaliacao) {
+	//public void setAvaliacao(Avaliacoes avaliacao) {
 		this.avaliacao = avaliacao;
 	}
 
@@ -257,27 +269,25 @@ public class Usuario implements UserDetails, Serializable{
 	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-	public int getIdRole() {
-		return idRole;
+	
+	public Role getRole() {
+		return role;
 	}
 
-	public void setIdRole(int idRole) {
-		this.idRole = idRole;
-	}	
-			
-	
-	
-	@Override
-	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
-				+ ", sobrenome=" + sobrenome + ", cpf_cnpj=" + cpf_cnpj + ", facebook=" + facebook + ", hasWhatsapp="
-				+ hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao + ", experiencia=" + experiencia
-				+ ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade + ", estado="
-				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", avaliacao=" + avaliacao + ", residencia=" + residencia
-				+ ", idRole=" + idRole + ", email=" + email + "]";
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
+	
+	public Estrelas getStars() {
+		return stars;
+	}
+
+	public void setStars(Estrelas stars) {
+		this.stars = stars;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -293,12 +303,13 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
 		result = prime * result + ((facebook == null) ? 0 : facebook.hashCode());
 		result = prime * result + ((hasWhatsapp == null) ? 0 : hasWhatsapp.hashCode());
-		result = prime * result + idRole;
 		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
+		result = prime * result + ((stars == null) ? 0 : stars.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
 		result = prime * result + ((residencia == null) ? 0 : residencia.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
@@ -370,12 +381,15 @@ public class Usuario implements UserDetails, Serializable{
 				return false;
 		} else if (!hasWhatsapp.equals(other.hasWhatsapp))
 			return false;
-		if (idRole != other.idRole)
-			return false;
 		if (idUsuario == null) {
 			if (other.idUsuario != null)
 				return false;
 		} else if (!idUsuario.equals(other.idUsuario))
+			return false;
+		if (stars == null) {
+			if (other.stars != null)
+				return false;
+		} else if (!stars.equals(other.stars))
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -396,6 +410,11 @@ public class Usuario implements UserDetails, Serializable{
 			if (other.residencia != null)
 				return false;
 		} else if (!residencia.equals(other.residencia))
+			return false;
+		if (role == null) {
+			if (other.role != null)
+				return false;
+		} else if (!role.equals(other.role))
 			return false;
 		if (senha == null) {
 			if (other.senha != null)
@@ -421,6 +440,16 @@ public class Usuario implements UserDetails, Serializable{
 	}
 
 	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + ", nome=" + nome
+				+ ", sobrenome=" + sobrenome + ", cpf_cnpj=" + cpf_cnpj + ", facebook=" + facebook + ", hasWhatsapp="
+				+ hasWhatsapp + ", telefone=" + telefone + ", profissao=" + profissao + ", experiencia=" + experiencia
+				+ ", endereco=" + endereco + ", complemento=" + complemento + ", cidade=" + cidade + ", estado="
+				+ estado + ", cep=" + cep + ", sexo=" + sexo + ", id_star=" + stars + ", avaliacao=" + avaliacao
+				+ ", residencia=" + residencia + ", role=" + role + ", email=" + email + "]";
+	}
+
+	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
 		return null;
@@ -429,37 +458,38 @@ public class Usuario implements UserDetails, Serializable{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return this.senha;
+		return null;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.nome;
+		return null;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
+
 
 }

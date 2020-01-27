@@ -16,7 +16,7 @@ public class Cidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_cidade")
-	private Long id_cidade;
+	private Integer id_cidade;
 	
 	@Column(name="nome_cidade")
 	private String nome_cidade;
@@ -29,13 +29,21 @@ public class Cidade {
 		return id_estado;
 	}
 
-	public Long getId_cidade() {
+	public Integer getId_cidade() {
 		return id_cidade;
+	}
+	
+	public void setId_cidade(Integer id_cidade) {
+		this.id_cidade = id_cidade;
+	}
+	
+	public void setNome_cidade(String nome_cidade) {
+		this.nome_cidade = nome_cidade;
 	}
 
 	public String getNome_cidade() {
 		return nome_cidade;
-	}
+	}	
 
 	@Override
 	public int hashCode() {

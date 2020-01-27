@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,11 +21,8 @@ public class Avaliacoes implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_avaliacao")
-	private Long idAvaliacao;
-	
-	@Column(name="id_usuario")
-	private int idUsuario;
-	
+	private Long idAvaliacao;	
+		
 	@Column(name="vl_compromisso")
 	private float compromisso;
 	
@@ -37,19 +37,15 @@ public class Avaliacoes implements Serializable{
 	
 	@Column(name="vl_media_avaliacao")
 	private double mediaAvaliacao;
-	
-	@Column(name="vl_star")
-	private int star;
-	
-	public int getIdUsuario() {
-		return idUsuario;
-	}		
+		
 	public Long getIdAvaliacao() {
 		return idAvaliacao;
 	}
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+		
+	public void setIdAvaliacao(Long idAvaliacao) {
+		this.idAvaliacao = idAvaliacao;
 	}
+ 
 	public float getOrganizacao() {
 		return organizacao;
 	}
@@ -80,15 +76,7 @@ public class Avaliacoes implements Serializable{
 	}
 	public void setMediaAvaliacao(double mediaAvaliacao) {
 		this.mediaAvaliacao = mediaAvaliacao;
-	}	
-	
-	public int getStar() {
-		return star;
-	}
-	public void setStar(int star) {
-		this.star = star;
-	}
-	
+	}		
 	
 	@Override
 	public int hashCode() {
@@ -97,15 +85,14 @@ public class Avaliacoes implements Serializable{
 		result = prime * result + Float.floatToIntBits(compromisso);
 		result = prime * result + Float.floatToIntBits(disciplina);
 		result = prime * result + ((idAvaliacao == null) ? 0 : idAvaliacao.hashCode());
-		result = prime * result + idUsuario;
 		result = prime * result + Float.floatToIntBits(limpeza);
 		long temp;
 		temp = Double.doubleToLongBits(mediaAvaliacao);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + Float.floatToIntBits(organizacao);
-		result = prime * result + star;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -124,24 +111,20 @@ public class Avaliacoes implements Serializable{
 				return false;
 		} else if (!idAvaliacao.equals(other.idAvaliacao))
 			return false;
-		if (idUsuario != other.idUsuario)
-			return false;
 		if (Float.floatToIntBits(limpeza) != Float.floatToIntBits(other.limpeza))
 			return false;
 		if (Double.doubleToLongBits(mediaAvaliacao) != Double.doubleToLongBits(other.mediaAvaliacao))
 			return false;
 		if (Float.floatToIntBits(organizacao) != Float.floatToIntBits(other.organizacao))
 			return false;
-		if (star != other.star)
-			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Avaliacoes [idAvaliacao=" + idAvaliacao + ", idUsuario=" + idUsuario + ", compromisso=" + compromisso
-				+ ", organizacao=" + organizacao + ", disciplina=" + disciplina + ", limpeza=" + limpeza
-				+ ", mediaAvaliacao=" + mediaAvaliacao + ", star=" + star + "]";
+		return "Avaliacoes [idAvaliacao=" + idAvaliacao + ", compromisso=" + compromisso + ", organizacao="
+				+ organizacao + ", disciplina=" + disciplina + ", limpeza=" + limpeza + ", mediaAvaliacao="
+				+ mediaAvaliacao + "]";
 	}
 	
-		
 }

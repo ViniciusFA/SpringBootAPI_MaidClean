@@ -14,7 +14,7 @@ public class Estado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_Estado")
-	private Long id;
+	private Integer id;
 	
 	@Column(name="nome_estado")
 	private String nome_estado;
@@ -27,8 +27,12 @@ public class Estado {
 		this.nome_estado = nome_estado;
 	}
 
-	public Long getId_estado() {
+	public Integer getId_estado() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

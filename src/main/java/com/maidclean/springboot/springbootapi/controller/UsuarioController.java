@@ -1,5 +1,6 @@
 package com.maidclean.springboot.springbootapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Example;
@@ -15,13 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maidclean.springboot.springbootapi.irepository.IAvaliacoesRepository;
+import com.maidclean.springboot.springbootapi.irepository.IExperienciaRepository;
+import com.maidclean.springboot.springbootapi.irepository.IStarsRepository;
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
+import com.maidclean.springboot.springbootapi.model.Cidade;
+import com.maidclean.springboot.springbootapi.model.Estado;
+import com.maidclean.springboot.springbootapi.model.Estrelas;
+import com.maidclean.springboot.springbootapi.model.Experiencia;
+import com.maidclean.springboot.springbootapi.model.PesquisaFuncionario;
 import com.maidclean.springboot.springbootapi.model.Response;
+import com.maidclean.springboot.springbootapi.model.Role;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
 import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Definition.Undefined;
-
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -31,25 +40,29 @@ public class UsuarioController {
 	private Usuario usuario = null;
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
+	@Autowired
+	private IStarsRepository starsRepository;
+	@Autowired
+	private IAvaliacoesRepository avaliacoesRepository;
+	@Autowired
+	private IExperienciaRepository experienciaRepository;
 
-	
 	public UsuarioController(IUsuarioRepository usuarioRepository) {
 		super();
 		this.usuarioRepository = usuarioRepository;
 	}
 
-			/**
-			 * BUSCAR UMA PESSOA PELO CÓDIGO
-			 * 
-			 * @param codigo
-			 * @return
-			 */
-	@RequestMapping(value = "/usuario/login/{login}", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	/**
+	 * BUSCAR UMA PESSOA PELO CÓDIGO
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	@RequestMapping(value = "/usuario/login/{login}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Usuario buscar(@PathVariable("login") String login) {
-		System.out.println(login); 		
-	return this.usuarioRepository.findByLogin(login);
-	 }
-				 
+		System.out.println(login);
+		return this.usuarioRepository.findByLogin(login);
+	}
 
 	/**
 	 * SALVAR UM NOVO REGISTRO
@@ -59,18 +72,18 @@ public class UsuarioController {
 	 */
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Usuario usuario) {
-		
+
 		try {
 			this.usuarioRepository.save(usuario);
-			if(usuario.getIdRole() == 3) {
-				return new Response(1, "Empregador cadastrado com sucesso.", usuario.getIdRole());
-			}else if(usuario.getIdRole() == 2) {
-				return new Response(1, "Funcionário cadastrado com sucesso.", usuario.getIdRole());
-			}else {
-				return new Response(1, "Administrador cadastrado com sucesso.", usuario.getIdRole());
-			}			
+			if (usuario.getRole().getId_role() == 3) {
+				return new Response(1, "Empregador cadastrado com sucesso.", usuario.getRole().getId_role());
+			} else if (usuario.getRole().getId_role() == 2) {
+				return new Response(1, "Funcionário cadastrado com sucesso.", usuario.getRole().getId_role());
+			} else {
+				return new Response(1, "Administrador cadastrado com sucesso.", usuario.getRole().getId_role());
+			}
 		} catch (Exception e) {
-			return new Response(0, e.getMessage(), usuario.getIdRole());
+			return new Response(0, e.getMessage(), usuario.getRole().getId_role());
 		}
 	}
 
@@ -85,9 +98,9 @@ public class UsuarioController {
 		try {
 			this.usuarioRepository.save(usuario);
 
-			return new Response(1, "Usuário atualizado com sucesso.", usuario.getIdRole());
+			return new Response(1, "Usuário atualizado com sucesso.", usuario.getRole().getId_role());
 		} catch (Exception e) {
-			return new Response(0, e.getMessage(), usuario.getIdRole());
+			return new Response(0, e.getMessage(), usuario.getRole().getId_role());
 		}
 	}
 
@@ -107,66 +120,98 @@ public class UsuarioController {
 	 * 
 	 * @param idRole
 	 * @return
-	 */	
-	  @RequestMapping(value = "/usuario/idRole", params= {"idRole"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public @ResponseBody List<Usuario> buscarUsuarioPorPerfil(@RequestParam("idRole") int idRole) { 
-	  
-		 Usuario usuario = new Usuario();
-		 usuario.setIdRole(idRole);
-	  return this.usuarioRepository.findByIdRole(usuario.getIdRole()); 
-	  }
-	 
+	 */
+	@RequestMapping(value = "/idRole/{idRole}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody List<Usuario> buscarUsuarioPorPerfil(@PathVariable("idRole") int idRole) {
+
+		return this.usuarioRepository.encontrarIdRole(idRole);
+	}
 
 	/**
-	* BUSCAR UM USUÁRIO COM PARAMETROS DINÂMICOS
-	* 
-	* @param usuario
-	* @return
-	*/	 
+	 * BUSCAR UM USUÁRIO COM PARAMETROS DINÂMICOS
+	 * 
+	 * @param usuario
+	 * @return
+	 */
 	@RequestMapping(value = "/usuario/listaUsuarios", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Iterable<Usuario> buscarParam(Usuario usuario) {
-			
-		usuario.setIdRole(2);	
+	// public @ResponseBody Iterable<Usuario> buscarParam(Usuario usuario) {
+	public @ResponseBody Iterable<Usuario> buscarParam(PesquisaFuncionario camposPesquisa) {
+		Usuario user = new Usuario();
+
+		Role role = new Role();
+		role.setId_role(camposPesquisa.getIdRole());
+		user.setRole(role);
 				
-		if(usuario.getNome() == "" || usuario.getNome().isEmpty()) {
-			usuario.setNome(null);
-		}
-		if(usuario.getSobrenome() == "" || usuario.getSobrenome().isEmpty() ) {
-			usuario.setSobrenome(null);		
-		}
-		if(usuario.getEstado() == "" || usuario.getEstado().isEmpty() || usuario.getEstado().equals("Selecione")) {
-			usuario.setEstado(null);
-		}
-		if(usuario.getCidade() == "" || usuario.getCidade().isEmpty()) {
-			usuario.setCidade(null);
-		}
-		if(usuario.getAvaliacao() == null ||usuario.getAvaliacao().equals("Selecione")) {
-			usuario.setAvaliacao(null);
-		}
-		if(usuario.getExperiencia() == "" || usuario.getExperiencia().isEmpty() || usuario.getExperiencia().equals("Selecione")) {
-			usuario.setExperiencia(null);
-		}
 		
-		System.out.println(usuario.getNome());
-		System.out.println(usuario.getSobrenome());
-		System.out.println(usuario.getCidade());
-		System.out.println(usuario.getEstado());
-		System.out.println(usuario.getAvaliacao());
-		System.out.println(usuario.getExperiencia());
+		// Populando o objeto Usuário para buscar no banco posteriormente
+		// nome				
+		if (camposPesquisa.getNome() != "") 
+			user.setNome(camposPesquisa.getNome());
+		else
+			user.setNome(null);
 		
-		Example<Usuario> usuarioExample = Example.of(usuario, ExampleMatcher.matchingAll()
-											 			   .withIgnoreNullValues());
+		// sobrenome
+		if (camposPesquisa.getSobrenome() != "") 
+			user.setSobrenome(camposPesquisa.getSobrenome());	
+		else
+			user.setSobrenome(null);
 				
-		//lista que receberá todos os usuarios encontrados no banco
-		 Iterable<Usuario> listaFuncionario =  this.usuarioRepository.findAll(usuarioExample);
-			
-		 //iteração para mostrar a lista de funcionarios encontrados no banco
-		 for (Usuario u : listaFuncionario) {
-	          System.out.println("\n"+u);
-	      }
-		 
-		System.out.println(listaFuncionario);
+		// estado
+		if (camposPesquisa.getEstado() != "") {
+			Estado estado = new Estado();
+			estado.setId(Integer.parseInt(camposPesquisa.getEstado()));
+			user.setEstado(estado);
+		}else
+			user.setEstado(null);
 		
+		// cidade
+		if (camposPesquisa.getCidade() != "") {
+			Cidade cidade = new Cidade();
+			cidade.setId_cidade(Integer.parseInt(camposPesquisa.getCidade()));
+			user.setCidade(cidade);
+		}else
+			user.setCidade(null);
+		
+				
+		// avaliacao
+		if (camposPesquisa.getStar() != "") {					
+			Estrelas estrelas = new Estrelas();
+			int id_star = 1;
+			int vl_star = 0;
+			
+			String[] starSplit= camposPesquisa.getStar().split(" - ");
+			id_star += Integer.parseInt(starSplit[0]);	
+			vl_star = Integer.parseInt(starSplit[0]);
+			
+			estrelas.setId_star(id_star);
+			estrelas.setValor_star(vl_star);
+			
+			user.setStars(estrelas);					
+		}else
+			user.setStars(null);
+		
+		// experiencia
+		if (camposPesquisa.getExperiencia() != "") {
+			Experiencia experiencia = new Experiencia();
+			
+			int id_experiencia  = experienciaRepository.buscarIdPeloNome(camposPesquisa.getExperiencia());
+			experiencia.setIdExperiencia(id_experiencia);
+			
+			user.setExperiencia(experiencia);
+		}else
+			user.setExperiencia(null);
+		
+
+		Example<Usuario> usuarioExample = Example.of(user,
+				ExampleMatcher.matchingAll()
+				.withIgnoreNullValues());
+
+		Iterable<Usuario> listaFuncionario = this.usuarioRepository.findAll(usuarioExample);
+
+		for (Usuario u : listaFuncionario) {
+			System.out.println("\n" + u);
+		}
+
 		return listaFuncionario;
 	}
 
@@ -175,12 +220,11 @@ public class UsuarioController {
 	 * 
 	 * @param codigo
 	 * @return
-	 */	
-	  @RequestMapping(value = "/usuario/idUsuario/{id_usuario}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
-	  public @ResponseBody Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {	  
-	  return this.usuarioRepository.findByIdUsuario(id_usuario); 
-	  }
-	 
+	 */
+	@RequestMapping(value = "/usuario/idUsuario/{id_usuario}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {
+		return this.usuarioRepository.findByIdUsuario(id_usuario);
+	}
 
 	/**
 	 * LOGAR UM USUÁRIO PELO USUÁRIO E SENHA
@@ -189,13 +233,12 @@ public class UsuarioController {
 	 * @return
 	 */
 	@RequestMapping(value = "/usuario/{login}/{senha}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response login(@PathVariable("login") String login, 
-										@PathVariable("senha") String senha) {
+	public @ResponseBody Response login(@PathVariable("login") String login, @PathVariable("senha") String senha) {
 		try {
 			usuario = this.usuarioRepository.encontrarLogin(login, senha);
-			if (usuario != null) {	
-				System.out.println(usuario.getIdRole());
-				return new Response(1, "Seja Bem-vindo.", usuario.getIdRole());
+			if (usuario != null) {
+				System.out.println(usuario.getRole().getId_role());
+				return new Response(1, "Seja Bem-vindo.", usuario.getRole().getId_role());
 			} else {
 				System.out.println(usuario);
 				return new Response(0, "Usuário não encontrado", 0);
@@ -210,40 +253,38 @@ public class UsuarioController {
 	 * 
 	 * @param codigo
 	 * @return
-	 */	
-	  @RequestMapping(value = "/usuario/{id_usuario}", method =
-	  RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	  public @ResponseBody Response excluir(@PathVariable("id_usuario") Long id_usuario) {
-	  
-	  Usuario usuario = usuarioRepository.findByIdUsuario(id_usuario);	  
-	  try { 
-		  usuarioRepository.delete(usuario);	  
-		  return new Response(1, "Registro excluído com sucesso.", usuario.getIdRole());
-	  
-	  }catch (Exception e) { 
-		  return new Response(0, e.getMessage(),usuario.getIdRole()); 
-	  	}
-	  }
-	  
-	  /**
-		 * BUSCAR UM USUÁRIO PELO EMAIL
-		 * 
-		 * @param email
-		 * @return
-		 */	  
-	  	@RequestMapping(value="/usuario/email/{email}", method = RequestMethod.GET
-	  			, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		  public @ResponseBody Response redefinirPassword(@PathVariable("email") String email) {
-	  		try {
-	  			usuario = this.usuarioRepository.encontrarEmail(email);		
-	  			if(usuario != null) {
-					return new Response(1,"Verifique o email.");	
-				}else {
-					return new Response(0,"Email não encontrado.");						
-				}
-	  		}catch(Exception e) {
-	  			return new Response(0,e.getMessage());			
-	  		}	
-		  }
+	 */
+	@RequestMapping(value = "/usuario/{id_usuario}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Response excluir(@PathVariable("id_usuario") Long id_usuario) {
+
+		Usuario usuario = usuarioRepository.findByIdUsuario(id_usuario);
+		try {
+			usuarioRepository.delete(usuario);
+			return new Response(1, "Registro excluído com sucesso.", usuario.getRole().getId_role());
+
+		} catch (Exception e) {
+			return new Response(0, e.getMessage(), usuario.getRole().getId_role());
+		}
+	}
+
+	/**
+	 * BUSCAR UM USUÁRIO PELO EMAIL
+	 * 
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "/usuario/email/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Response redefinirPassword(@PathVariable("email") String email) {
+		try {
+			usuario = this.usuarioRepository.encontrarEmail(email);
+			if (usuario != null) {
+				return new Response(1, "Verifique o email.");
+			} else {
+				return new Response(0, "Email não encontrado.");
+			}
+		} catch (Exception e) {
+			return new Response(0, e.getMessage());
+		}
+	}
 
 }

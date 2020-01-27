@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IAvaliacoesRepository;
-import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
+import com.maidclean.springboot.springbootapi.irepository.IStarsRepository;
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
+import com.maidclean.springboot.springbootapi.model.Estrelas;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
 import java.math.BigDecimal;
@@ -27,9 +28,11 @@ public class AvaliacoesController {
 
 	@Autowired
 	private IAvaliacoesRepository avaliacoesRepository;
+		
 	private List<Avaliacoes> listaAvaliacoes = new ArrayList<>();
 	private Avaliacoes avaliacoes = null;
-	private int stars = 0;
+	Estrelas stars = new Estrelas();
+	
 
 	public AvaliacoesController(IAvaliacoesRepository avaliacoesRepository) {
 		super();
@@ -89,7 +92,6 @@ public class AvaliacoesController {
 		for (Avaliacoes av : this.listaAvaliacoes) {
 			idAvaliacao = av.getIdAvaliacao();	
 			media = (av.getCompromisso() + av.getLimpeza() + av.getOrganizacao() + av.getDisciplina()) / 4;	
-			//formatting date with 2 decimal places using BigDecimal
 			bd = new BigDecimal(media).setScale(2, RoundingMode.HALF_EVEN);	
 			//getting the value of BigDecimal and converting it in double
 			mediaArredondada = bd.doubleValue();
@@ -97,9 +99,12 @@ public class AvaliacoesController {
 			mapAvaliation.put(av.getIdAvaliacao(), mediaArredondada);	
 			//getting the avaliation through id
 			avaliacoes = this.avaliacoesRepository.findByIdAvaliacao(idAvaliacao);				
-			starsResult = this.showStars(mediaArredondada);
-			//set star and average in Object Avaliacoes
-			avaliacoes.setStar(starsResult);
+			
+			
+			//starsResult = this.showStars(mediaArredondada);
+			starsResult = this.getIdStar(mediaArredondada);
+			
+			//set star and average in Object Avaliacoes;
 			avaliacoes.setMediaAvaliacao(mediaArredondada);
 			//saving update in dataBase
 			this.avaliacoesRepository.save(avaliacoes);			
@@ -108,20 +113,30 @@ public class AvaliacoesController {
 	}
 
 	//show stars in the view using this result
-	public int showStars(double media) {
+	public int getIdStar(double media) {
+	
 		if (media < 1.0)
-			this.stars = 0;
+			this.stars.setId_star(1);
+			//this.stars = 0;		
 		else if (media >= 1 && media < 3)
-			this.stars = 1;
+			this.stars.setId_star(2);
+			//this.stars = 1;
 		else if (media >= 3 && media < 5)
-			this.stars = 2;
+			this.stars.setId_star(3);
+			//this.stars = 2;
 		else if (media >= 5 && media < 7)
-			this.stars = 3;
+			this.stars.setId_star(4);
+			//this.stars = 3;
 		else if (media >= 7 && media < 9)
-			this.stars = 4;
+			this.stars.setId_star(5);
+			//this.stars = 4;
 		else
-			this.stars = 5;		
+			this.stars.setId_star(6);
+			//this.stars = 5;		
 
-		return stars;
+		return this.stars.getId_star();
 	}
+
+	
+	
 }

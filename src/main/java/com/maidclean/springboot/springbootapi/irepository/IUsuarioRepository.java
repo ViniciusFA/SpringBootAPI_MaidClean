@@ -26,8 +26,13 @@ public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByEx
 	  List<Usuario> findAll();
 	  
 	  Usuario findByIdUsuario(Long idUsuario);
+	  
+	  @Query(value="SELECT * FROM tb_usuarios u JOIN tb_avaliacoes av ON (u.id_avaliacao = av.id_avaliacao)",
+				 nativeQuery = true)
+		 List<Object> encontrarTodosCampos();
 	  	  
-	  List<Usuario> findByIdRole(int idRole);
+	  @Query(value="SELECT * FROM tb_usuarios u where u.id_role =:idRole", nativeQuery = true)
+	  List<Usuario> encontrarIdRole(int idRole);
 	  
 	  @Query(value="SELECT * FROM tb_usuarios u where u.ds_email =:email", nativeQuery = true)
 	  Usuario encontrarEmail(String email);

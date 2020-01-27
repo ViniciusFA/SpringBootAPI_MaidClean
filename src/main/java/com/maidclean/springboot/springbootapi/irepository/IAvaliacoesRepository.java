@@ -16,8 +16,13 @@ public interface IAvaliacoesRepository extends Repository<Avaliacoes,Long>{
 	
 	 List<Avaliacoes> findAll();
 	 
+	 @Query(value="SELECT * FROM tb_avaliacoes a where id_star =:id_star", nativeQuery = true)
+	 List<Avaliacoes> buscarIdStar(int id_star);
+	 
 	 Avaliacoes findByIdAvaliacao(Long idAvaliacao);
 	 
 	 void save(Avaliacoes avaliacao);
+	 
+	
 	  
 }

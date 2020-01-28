@@ -1,5 +1,6 @@
 package com.maidclean.springboot.springbootapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.maidclean.springboot.springbootapi.irepository.IEstadoRepository;
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.irepository.IVagaRepository;
 import com.maidclean.springboot.springbootapi.model.Funcionario;
@@ -30,6 +32,9 @@ public class VagaController {
 	
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private IEstadoRepository estadoRepository;
 	
 	
 	/**
@@ -55,14 +60,25 @@ public class VagaController {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Vaga vaga) {
 		Usuario usuario = new Usuario();
-		usuario = usuarioRepository.findByIdUsuario(Long.parseLong(vaga.getIdEmpregador()));
+		usuario.setIdUsuario(Long.parseLong(vaga.getIdEmpregador()));
+		
 		vaga.setIdUsuario(usuario);
 		try {
+			int id_estado = Integer.parseInt(vaga.getEstado());
+			int id_cidade = Integer.parseInt(vaga.getCidade());
+			String cityAndState = "";
+
+			cityAndState = estadoRepository.getStateAndCityNames(id_estado, id_cidade);
+
+			String[] listCityAndState = cityAndState.split(",", 3);
+			vaga.setEstado(listCityAndState[0]);
+			vaga.setCidade(listCityAndState[2]);
 			this.vagaRepository.save(vaga);
-			return new Response(1,"Vaga Registrada com sucesso.");
-		}catch(Exception e ) {
-			return new Response(0, e.getMessage());			
-		} 
+			
+			return new Response(1, "Vaga Registrada com sucesso.");
+		} catch (Exception e) {
+			return new Response(0, e.getMessage());
+		}
 	}
 	
 

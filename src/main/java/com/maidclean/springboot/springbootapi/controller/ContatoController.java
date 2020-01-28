@@ -33,66 +33,65 @@ public class ContatoController {
 	}
 
 	/**
-			 * SALVAR UMA NOVA MENSAGEM
-			 * 
-			 * @param contato
-			 * @return
-			 */
-	
-	  @RequestMapping(value="/contato", method = RequestMethod.POST,
-	  consumes=MediaType.APPLICATION_JSON_UTF8_VALUE ,
-	  produces=MediaType.APPLICATION_JSON_UTF8_VALUE ) public @ResponseBody
-	  Response save(@RequestBody Contato contato) { try {
-	  
-	  //DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	  contato.setDataContato(new Date());
-	  
-	  
-	  this.contatoRepository.save(contato); return new Response(1,
-	  "Mensagem enviada com sucesso.\n Em breve entraremos em contato.");
-	  }catch(Exception e) { return new Response(0, e.getMessage()); } }
-	  
-	 
+	 * SALVAR UMA NOVA MENSAGEM
+	 * 
+	 * @param contato
+	 * @return
+	 */
+
+	@RequestMapping(value = "/contato", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Response save(@RequestBody Contato contato) {
+		try {
+
+			// DateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			contato.setDataContato(new Date());
+
+			this.contatoRepository.save(contato);
+			return new Response(1, "Mensagem enviada com sucesso.\n Em breve entraremos em contato.");
+		} catch (Exception e) {
+			return new Response(0, e.getMessage());
+		}
+	}
+
 	/**
-		 * CONSULTAR TODAS AS PESSOAS
-		 * 
-		 * @return
-		 */
-	
-	  @RequestMapping(value="/contato", method=RequestMethod.GET, produces =
-	  MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody List<Contato>
-	  consultar() {
-	  
-	  return this.contatoRepository.findAll(); }
-	  
-	 
+	 * CONSULTAR TODAS AS PESSOAS
+	 * 
+	 * @return
+	 */
+
+	@RequestMapping(value = "/contato", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody List<Contato> consultar() {
+		return this.contatoRepository.findAll();
+	}
+
 	/**
-		 * BUSCAR UM CONTATO PELO CÓDIGO
-		 * 
-		 * @param codigo
-		 * @return
-		 */
-	
-	  @RequestMapping(value="/contato/{id_contato}", method=RequestMethod.GET,
-	  produces = MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody
-	  Contato buscar(@PathVariable("id_contato") @RequestBody Integer id_contato) {
-	  return this.contatoRepository.findById(id_contato); }
-	  
-	 
+	 * BUSCAR UM CONTATO PELO CÓDIGO
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+
+	@RequestMapping(value = "/contato/{id_contato}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Contato buscar(@PathVariable("id_contato") @RequestBody Integer id_contato) {
+		return this.contatoRepository.findById(id_contato);
+	}
+
 	/***
-		 * EXCLUIR UM CONTATO PELO CÓDIGO
-		 * 
-		 * @param codigo
-		 * @return
-		 */
-			  @RequestMapping(value="/contato/{id_contato}", method = RequestMethod.DELETE,
-			  produces=MediaType.APPLICATION_JSON_UTF8_VALUE) public @ResponseBody Response
-			  excluir(@PathVariable("id_contato") @RequestBody Integer id_contato) {
-			  Contato contato = this.contatoRepository.findById(id_contato); try {
-			  this.contatoRepository.delete(contato); return new Response(1,
-			  "Registro excluído com sucesso."); }catch(Exception e) { return new
-			  Response(0, e.getMessage()); }
-			  
-			  }
-			 
+	 * EXCLUIR UM CONTATO PELO CÓDIGO
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	@RequestMapping(value = "/contato/{id_contato}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Response excluir(@PathVariable("id_contato") @RequestBody Integer id_contato) {
+		Contato contato = this.contatoRepository.findById(id_contato);
+		try {
+			this.contatoRepository.delete(contato);
+			return new Response(1, "Registro excluído com sucesso.");
+		} catch (Exception e) {
+			return new Response(0, e.getMessage());
+		}
+
+	}
+
 }

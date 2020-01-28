@@ -9,10 +9,10 @@ import com.maidclean.springboot.springbootapi.model.Usuario;
 import java.util.List;
 
 @org.springframework.stereotype.Repository
-public interface IAvaliacoesRepository extends Repository<Avaliacoes,Long>{	
-		
-	@Query(value="SELECT * FROM tb_avaliacoes a where a.id_usuario =:id_usuario", nativeQuery = true)
-	  Avaliacoes getRatingUser(int id_usuario);
+public interface IAvaliacoesRepository extends Repository<Avaliacoes,Long>{			
+	
+	  @Query(value="SELECT * FROM tb_avaliacoes a where a.id_usuario =:id_usuario",
+	  nativeQuery = true) Avaliacoes getRatingUser(int id_usuario);	 
 	
 	 List<Avaliacoes> findAll();
 	 
@@ -23,6 +23,11 @@ public interface IAvaliacoesRepository extends Repository<Avaliacoes,Long>{
 	 
 	 void save(Avaliacoes avaliacao);
 	 
+	/*
+	 * @Query(
+	 * value="select * from tb_avaliacoes where id_avaliacao =: id_avaliation"
+	 * ,nativeQuery = true) Avaliacoes getAvaliations(int id_avaliation);
+	 */
 	
 	  
 }

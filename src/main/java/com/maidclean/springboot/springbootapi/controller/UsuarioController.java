@@ -223,7 +223,8 @@ public class UsuarioController {
 	 */
 	@RequestMapping(value = "/usuario/idUsuario/{id_usuario}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Usuario buscarById(@PathVariable("id_usuario") Long id_usuario) {
-		return this.usuarioRepository.findByIdUsuario(id_usuario);
+		usuario = this.usuarioRepository.findByIdUsuario(id_usuario);
+		return usuario;
 	}
 
 	/**
@@ -284,6 +285,27 @@ public class UsuarioController {
 			}
 		} catch (Exception e) {
 			return new Response(0, e.getMessage());
+		}
+	}
+	
+	/**
+	 * BUSCAR AVALIACOES PELO ID DO USUÁRIO
+	 * 
+	 * @param id_usuario
+	 * @return
+	 */
+	@RequestMapping(value = "/avaliacoes/{id_usuario}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody Avaliacoes getRatingUser(@PathVariable("id_usuario") int id_usuario) {
+
+		Avaliacoes avaliacao = new Avaliacoes();
+		long id_avaliacao = usuarioRepository.buscaIdAvaliation(id_usuario);
+		avaliacao = avaliacoesRepository.findByIdAvaliacao(id_avaliacao);
+		
+
+		if (avaliacao != null) {
+			return avaliacao;
+		} else {
+			return new Avaliacoes();
 		}
 	}
 

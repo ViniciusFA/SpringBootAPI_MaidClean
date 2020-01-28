@@ -89,9 +89,9 @@ public class Usuario implements UserDetails, Serializable{
 	@JoinColumn(name="id_stars")
 	private Estrelas stars;
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_avaliacao")
-	private List<Avaliacoes> avaliacao;
+	private Avaliacoes avaliacao;
 
 	@Column(name="ds_residencia")
 	private String residencia;
@@ -231,12 +231,12 @@ public class Usuario implements UserDetails, Serializable{
 		this.sexo = sexo;
 	}
 
-	public List<Avaliacoes> getAvaliacao() {
+	public Avaliacoes getAvaliacao() {
 	//public Avaliacoes getAvaliacao() {	
 		return avaliacao;
 	}
 
-	public void setAvaliacao(List<Avaliacoes> avaliacao) {
+	public void setAvaliacao(Avaliacoes avaliacao) {
 	//public void setAvaliacao(Avaliacoes avaliacao) {
 		this.avaliacao = avaliacao;
 	}

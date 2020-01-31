@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IAvaliacoesRepository;
+import com.maidclean.springboot.springbootapi.irepository.IEstadoRepository;
 import com.maidclean.springboot.springbootapi.irepository.IExperienciaRepository;
 import com.maidclean.springboot.springbootapi.irepository.IStarsRepository;
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
@@ -46,6 +47,8 @@ public class UsuarioController {
 	private IAvaliacoesRepository avaliacoesRepository;
 	@Autowired
 	private IExperienciaRepository experienciaRepository;
+	@Autowired
+	private IEstadoRepository estadoRepository;
 
 	public UsuarioController(IUsuarioRepository usuarioRepository) {
 		super();
@@ -73,7 +76,26 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody Response save(@RequestBody Usuario usuario) {
 
+		System.out.println(usuario);
+		int id_estado = usuario.getEstado().getId_estado();
+		int id_cidade = usuario.getCidade().getId_cidade();
+		
+		
+		String stateCityNames = estadoRepository.getStateAndCityNames(id_estado, id_cidade);
+		String[] stateCityNamesList = stateCityNames.split(",", 3);
+		String nome_estado = stateCityNamesList[0];
+		String nome_cidade = stateCityNamesList[2];
+		
+		usuario.getEstado().setId_estado(id_estado);
+		usuario.getEstado().setNome_estado(nome_estado);
+		usuario.getCidade().setId_cidade(id_cidade);
+		usuario.getCidade().setNome_cidade(nome_cidade);
+		
+		
+		System.out.println(usuario);
 		try {
+			//get name of state cause it's not null in database
+			
 			this.usuarioRepository.save(usuario);
 			if (usuario.getRole().getId_role() == 3) {
 				return new Response(1, "Empregador cadastrado com sucesso.", usuario.getRole().getId_role());
@@ -159,7 +181,7 @@ public class UsuarioController {
 		// estado
 		if (camposPesquisa.getEstado() != "") {
 			Estado estado = new Estado();
-			estado.setId(Integer.parseInt(camposPesquisa.getEstado()));
+			estado.setId_estado(Integer.parseInt(camposPesquisa.getEstado()));
 			user.setEstado(estado);
 		}else
 			user.setEstado(null);

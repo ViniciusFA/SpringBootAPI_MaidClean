@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface ICidadeRepository  extends Repository<Cidade,Integer>{
 	
-	@Query(value="SELECT * from tb_cidades c where c.id_estado =:id_estado", nativeQuery = true)
-	 List<Cidade> findById(Long id_estado);
-	
 	List<Cidade> findAll();
+	
+	@Query(value="SELECT * from tb_cidades c where c.id_estado =:id_estado", nativeQuery = true)
+	 List<Cidade> findById(Long id_estado);	
 
 }

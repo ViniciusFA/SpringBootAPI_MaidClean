@@ -9,7 +9,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_experiencia")
-public class Experiencia {
+public class Experiencia {	
+	
+	public Experiencia() {}
+	
+	public Experiencia(long idExperiencia, String tempo) {
+		super();
+		this.idExperiencia = idExperiencia;
+		this.tempo = tempo;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

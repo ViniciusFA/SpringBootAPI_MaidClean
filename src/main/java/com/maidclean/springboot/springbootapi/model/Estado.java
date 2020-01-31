@@ -14,7 +14,7 @@ public class Estado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id_Estado")
-	private Integer id;
+	private Integer id_estado;
 	
 	@Column(name="nome_estado")
 	private String nome_estado;
@@ -28,18 +28,19 @@ public class Estado {
 	}
 
 	public Integer getId_estado() {
-		return id;
+		return id_estado;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId_estado(Integer id_estado) {
+		this.id_estado = id_estado;
 	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id== null) ? 0 : id.hashCode());
+		result = prime * result + ((id_estado == null) ? 0 : id_estado.hashCode());
 		result = prime * result + ((nome_estado == null) ? 0 : nome_estado.hashCode());
 		return result;
 	}
@@ -53,10 +54,10 @@ public class Estado {
 		if (getClass() != obj.getClass())
 			return false;
 		Estado other = (Estado) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (id_estado == null) {
+			if (other.id_estado != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id_estado.equals(other.id_estado))
 			return false;
 		if (nome_estado == null) {
 			if (other.nome_estado != null)
@@ -68,7 +69,7 @@ public class Estado {
 
 	@Override
 	public String toString() {
-		return "Estado [id_estado=" + id + ", nome_estado=" + nome_estado + "]";
-	}	
+		return "Estado [id_estado=" + id_estado + ", nome_estado=" + nome_estado + "]";
+	}
 
 }

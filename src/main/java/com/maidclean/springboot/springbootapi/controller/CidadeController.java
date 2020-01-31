@@ -22,11 +22,15 @@ public class CidadeController {
 	
 	@Autowired
 	private ICidadeRepository cidadeRepository;
+	
+	@RequestMapping(value = "/localidade/cidades", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody List<Cidade> buscarCidades(){
+		return this.cidadeRepository.findAll();
+	}
 
 	@RequestMapping(value = "/localidade/cidades/{id_estado}",  method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody List<Cidade> buscarById(@PathVariable("id_estado") Long id_estado) {
 		return this.cidadeRepository.findById(id_estado);
 	}
-	
 
 }

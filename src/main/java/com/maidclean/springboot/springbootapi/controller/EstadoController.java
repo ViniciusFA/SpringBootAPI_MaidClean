@@ -27,4 +27,6 @@ public class EstadoController {
 		return this.estadoRepository.findAll();
 	}
 	
+	
+	
 }

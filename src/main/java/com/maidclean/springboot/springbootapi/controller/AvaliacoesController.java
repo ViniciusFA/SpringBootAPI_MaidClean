@@ -3,17 +3,14 @@ package com.maidclean.springboot.springbootapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IAvaliacoesRepository;
-import com.maidclean.springboot.springbootapi.irepository.IStarsRepository;
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.Estrelas;
-import com.maidclean.springboot.springbootapi.model.Usuario;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -30,7 +27,6 @@ public class AvaliacoesController {
 	private IAvaliacoesRepository avaliacoesRepository;
 
 	private List<Avaliacoes> listaAvaliacoes = new ArrayList<>();
-	private Avaliacoes avaliacoes = null;
 	Estrelas stars = new Estrelas();
 
 	public AvaliacoesController(IAvaliacoesRepository avaliacoesRepository) {
@@ -82,8 +78,6 @@ public class AvaliacoesController {
 		long idAvaliacao = 0;
 		int starsResult = 0;
 		BigDecimal bd;
-
-		Usuario user = new Usuario();
 
 		HashMap<Long, Double> mapAvaliation = new HashMap<Long, Double>();
 

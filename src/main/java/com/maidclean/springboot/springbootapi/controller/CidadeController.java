@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.ICidadeRepository;
 import com.maidclean.springboot.springbootapi.model.Cidade;
-import com.maidclean.springboot.springbootapi.model.Estado;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController

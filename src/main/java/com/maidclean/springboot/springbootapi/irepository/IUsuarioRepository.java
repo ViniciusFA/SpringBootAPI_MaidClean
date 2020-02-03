@@ -1,18 +1,12 @@
 package com.maidclean.springboot.springbootapi.irepository;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.hibernate.criterion.Example;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
-import org.springframework.lang.Nullable;
 
-import com.maidclean.springboot.springbootapi.model.Avaliacoes;
-import com.maidclean.springboot.springbootapi.model.PesquisaTelaModel;
-import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
 

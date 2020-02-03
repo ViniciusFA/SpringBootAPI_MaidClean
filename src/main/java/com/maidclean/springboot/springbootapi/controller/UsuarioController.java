@@ -1,6 +1,5 @@
 package com.maidclean.springboot.springbootapi.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Example;
@@ -12,14 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IAvaliacoesRepository;
 import com.maidclean.springboot.springbootapi.irepository.IEstadoRepository;
 import com.maidclean.springboot.springbootapi.irepository.IExperienciaRepository;
-import com.maidclean.springboot.springbootapi.irepository.IStarsRepository;
 import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.Cidade;
@@ -31,8 +28,6 @@ import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Role;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 
-import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Definition.Undefined;
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
@@ -41,8 +36,6 @@ public class UsuarioController {
 	private Usuario usuario = null;
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
-	@Autowired
-	private IStarsRepository starsRepository;
 	@Autowired
 	private IAvaliacoesRepository avaliacoesRepository;
 	@Autowired
@@ -84,7 +77,7 @@ public class UsuarioController {
 		String stateCityNames = estadoRepository.getStateAndCityNames(id_estado, id_cidade);
 		String[] stateCityNamesList = stateCityNames.split(",", 3);
 		String nome_estado = stateCityNamesList[0];
-		String nome_cidade = stateCityNamesList[2];
+		String nome_cidade = stateCityNamesList[1];
 		
 		usuario.getEstado().setId_estado(id_estado);
 		usuario.getEstado().setNome_estado(nome_estado);
@@ -104,23 +97,6 @@ public class UsuarioController {
 			} else {
 				return new Response(1, "Administrador cadastrado com sucesso.", usuario.getRole().getId_role());
 			}
-		} catch (Exception e) {
-			return new Response(0, e.getMessage(), usuario.getRole().getId_role());
-		}
-	}
-
-	/**
-	 * ATUALIZAR O REGISTRO DE UM USUÁRIO
-	 * 
-	 * @param usuário
-	 * @return
-	 */
-	@RequestMapping(value = "/funcionario", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody Response atualizar(@RequestBody Usuario usuario) {
-		try {
-			this.usuarioRepository.save(usuario);
-
-			return new Response(1, "Usuário atualizado com sucesso.", usuario.getRole().getId_role());
 		} catch (Exception e) {
 			return new Response(0, e.getMessage(), usuario.getRole().getId_role());
 		}

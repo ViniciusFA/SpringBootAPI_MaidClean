@@ -1,7 +1,5 @@
 package com.maidclean.springboot.springbootapi.model;
 
-import java.util.Optional;
-
 public class PesquisaFuncionario {
 
 	private String nome = "";

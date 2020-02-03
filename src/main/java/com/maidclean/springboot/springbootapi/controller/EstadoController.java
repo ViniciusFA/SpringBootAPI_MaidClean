@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.maidclean.springboot.springbootapi.irepository.ICidadeRepository;
 import com.maidclean.springboot.springbootapi.irepository.IEstadoRepository;
 import com.maidclean.springboot.springbootapi.model.Estado;
 

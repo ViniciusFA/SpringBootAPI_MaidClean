@@ -1,6 +1,5 @@
 package com.maidclean.springboot.springbootapi.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maidclean.springboot.springbootapi.irepository.IEstadoRepository;
-import com.maidclean.springboot.springbootapi.irepository.IUsuarioRepository;
 import com.maidclean.springboot.springbootapi.irepository.IVagaRepository;
-import com.maidclean.springboot.springbootapi.model.Funcionario;
 import com.maidclean.springboot.springbootapi.model.Response;
 import com.maidclean.springboot.springbootapi.model.Usuario;
 import com.maidclean.springboot.springbootapi.model.Vaga;
@@ -29,10 +26,7 @@ public class VagaController {
 
 	@Autowired
 	private IVagaRepository vagaRepository;
-	
-	@Autowired
-	private IUsuarioRepository usuarioRepository;
-	
+		
 	@Autowired
 	private IEstadoRepository estadoRepository;
 	
@@ -45,8 +39,7 @@ public class VagaController {
 	@RequestMapping(value = "/vagas", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody List<Vaga> consultar() {
 	
-		//get to name in tb_usuarios with foreign key id_usuario
-		
+		//get to name in tb_usuarios with foreign key id_usuario		
 		return this.vagaRepository.findAll();
 	}
 	

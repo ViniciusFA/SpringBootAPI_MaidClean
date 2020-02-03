@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
 import com.maidclean.springboot.springbootapi.model.Cidade;
-import com.maidclean.springboot.springbootapi.model.Estado;
 
 import java.util.List;
 

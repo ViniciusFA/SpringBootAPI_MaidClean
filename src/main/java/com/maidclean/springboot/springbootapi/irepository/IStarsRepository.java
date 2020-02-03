@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import com.maidclean.springboot.springbootapi.model.Avaliacoes;
 import com.maidclean.springboot.springbootapi.model.Estrelas;
 
 @org.springframework.stereotype.Repository

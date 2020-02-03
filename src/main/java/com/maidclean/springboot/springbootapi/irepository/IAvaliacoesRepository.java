@@ -4,7 +4,6 @@ import org.springframework.data.repository.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.maidclean.springboot.springbootapi.model.Avaliacoes;
-import com.maidclean.springboot.springbootapi.model.Usuario;
 
 import java.util.List;
 

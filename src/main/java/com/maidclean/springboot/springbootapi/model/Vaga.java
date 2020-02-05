@@ -24,7 +24,7 @@ public class Vaga implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_vaga")
-	private int id;
+	private Integer id;
 
 	@Column(name = "ds_titulo")
 	private String titulo;
@@ -41,15 +41,21 @@ public class Vaga implements Serializable {
 	@Transient
 	private String nomeEmpregador;
 
-	@Column(name = "ds_estado")
-	private String estado;
+	@ManyToOne
+	@JoinColumn(name = "id_estado")
+	private Estado estado;
 
-	@Column(name = "ds_cidade")
-	private String cidade;
+	@ManyToOne
+	@JoinColumn(name = "id_cidade")
+	private Cidade cidade;
 
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
-	private Usuario idUsuario;
+	private Usuario usuario;
+	
+	@ManyToOne
+	@JoinColumn(name ="id_experiencia")
+	private Experiencia experiencia;
 
 	public String getTitulo() {
 		return titulo;
@@ -83,19 +89,19 @@ public class Vaga implements Serializable {
 		this.nomeEmpregador = nomeEmpregador;
 	}
 
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
@@ -103,24 +109,33 @@ public class Vaga implements Serializable {
 		return serialVersionUID;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Usuario getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(Usuario idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getIdEmpregador() {
 		return idEmpregador;
+	}
+	
+
+	public Experiencia getExperiencia() {
+		return experiencia;
+	}
+
+	public void setExperiencia(Experiencia experiencia) {
+		this.experiencia = experiencia;
 	}
 
 	@Override
@@ -130,9 +145,10 @@ public class Vaga implements Serializable {
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((idEmpregador == null) ? 0 : idEmpregador.hashCode());
-		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		result = prime * result + ((nomeEmpregador == null) ? 0 : nomeEmpregador.hashCode());
 		result = prime * result + ((subtitulo == null) ? 0 : subtitulo.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
@@ -163,17 +179,25 @@ public class Vaga implements Serializable {
 				return false;
 		} else if (!estado.equals(other.estado))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (idEmpregador == null) {
 			if (other.idEmpregador != null)
 				return false;
 		} else if (!idEmpregador.equals(other.idEmpregador))
 			return false;
-		if (idUsuario == null) {
-			if (other.idUsuario != null)
+		if (experiencia == null) {
+			if (other.experiencia != null)
 				return false;
-		} else if (!idUsuario.equals(other.idUsuario))
+		} else if (!experiencia.equals(other.experiencia))
 			return false;
-		if (id != other.id)
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		if (nomeEmpregador == null) {
 			if (other.nomeEmpregador != null)
@@ -195,9 +219,9 @@ public class Vaga implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Vaga [id_vaga=" + id + ", titulo=" + titulo + ", subtitulo=" + subtitulo + ", descricao="
-				+ descricao + ", idEmpregador=" + idEmpregador + ", nomeEmpregador=" + nomeEmpregador + ", estado="
-				+ estado + ", cidade=" + cidade + ", idUsuario=" + idUsuario + "]";
+		return "Vaga [id=" + id + ", titulo=" + titulo + ", subtitulo=" + subtitulo + ", descricao=" + descricao
+				+ ", idEmpregador=" + idEmpregador + ", nomeEmpregador=" + nomeEmpregador + ", estado=" + estado
+				+ ", cidade=" + cidade + ", idUsuario=" + usuario + ", idExperiencia=" + experiencia + "]";
 	}
 
 }

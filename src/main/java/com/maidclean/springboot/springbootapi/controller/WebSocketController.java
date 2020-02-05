@@ -25,7 +25,7 @@ public class WebSocketController {
 	}
 	
 	@MessageMapping("send/message")
-	public void onReceivedMessage(String message,String user) {
+	public void onReceivedMessage(String message) {
 		arrumarHora(horaAtualString);
 		
 		this.template.convertAndSend("/chat",horaAtualString+ "- "+message);			
@@ -36,7 +36,7 @@ public class WebSocketController {
 	//Horario está adiantada em 1 hora
 	public void arrumarHora(String horaAtual) {				
 		Date horaAtuall = Calendar.getInstance().getTime();
-		int hora = horaAtuall.getHours() - 1;		
+		int hora = horaAtuall.getHours();		
 		int minutos = horaAtuall.getMinutes();
 		int segundos = horaAtuall.getSeconds();	
 		
@@ -44,25 +44,22 @@ public class WebSocketController {
 		if(hora >= 0 && hora < 10) {
 			HoraString = "0";
 			HoraString += Integer.toString(hora);
-		}else {
-			HoraString = Integer.toString(hora);
-		}
+		}else 
+			HoraString = Integer.toString(hora);		
 		
 		//adiciona um 0 na frente do valor se os minutos for menor que 10
 		 if(minutos >= 0 && minutos < 10) {
 			MinutosString = "0";
 			MinutosString += Integer.toString(minutos);
-		}else {
-			MinutosString = Integer.toString(minutos);
-		}
+		}else 
+			MinutosString = Integer.toString(minutos);		
 		
 		//adiciona um 0 na frente do valor se os minutos for menor que 10
 		if(segundos >= 0 && segundos < 10) {
 			SegundosString = "0";
 			SegundosString += Integer.toString(segundos);
-		}else {
-			SegundosString = Integer.toString(segundos);
-		}
+		}else 
+			SegundosString = Integer.toString(segundos);		
 		
 		//concatena a hora,minutos e segundos em uma variavel só
 		horaAtual = HoraString + ":" + MinutosString + ":" + SegundosString;				

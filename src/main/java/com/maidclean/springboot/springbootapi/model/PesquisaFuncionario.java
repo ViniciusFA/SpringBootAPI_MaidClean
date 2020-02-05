@@ -2,6 +2,8 @@ package com.maidclean.springboot.springbootapi.model;
 
 public class PesquisaFuncionario {
 
+	public PesquisaFuncionario() {}
+
 	private String nome = "";
 	private String sobrenome = "";
 	private String estado = "";
@@ -9,9 +11,6 @@ public class PesquisaFuncionario {
 	private String star = "";
 	private String experiencia = "";
 	private int idRole = 0;
-	
-	public PesquisaFuncionario() {}
-
 	
 	public String getNome() {
 		return nome;
@@ -137,6 +136,8 @@ public class PesquisaFuncionario {
 		return "PesquisaFuncionario [nome=" + nome + ", sobrenome=" + sobrenome + ", estado=" + estado + ", cidade="
 				+ cidade + ", star=" + star + ", experiencia=" + experiencia + ", idRole=" + idRole + "]";
 	}
+	
+	
 	
 
 }

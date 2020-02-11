@@ -35,7 +35,6 @@ public class Estado {
 		this.id_estado = id_estado;
 	}
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

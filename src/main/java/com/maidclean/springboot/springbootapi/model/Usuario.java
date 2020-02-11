@@ -14,9 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name="tb_usuarios")
@@ -97,6 +101,10 @@ public class Usuario implements UserDetails, Serializable{
 
 	@Column(name="ds_email")
 	private String email;
+	
+	@OneToOne
+	@JoinColumn(name = "id_image")	
+	private ImagemPerfil foto;
 	
 	public String getLogin() {
 		return login;
@@ -282,7 +290,15 @@ public class Usuario implements UserDetails, Serializable{
 		this.stars = stars;
 	}
 
-	
+	public ImagemPerfil getFoto() {
+		return foto;
+	}
+
+	public void setFoto(ImagemPerfil foto) {
+		this.foto = foto;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -297,9 +313,9 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((experiencia == null) ? 0 : experiencia.hashCode());
 		result = prime * result + ((facebook == null) ? 0 : facebook.hashCode());
+		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
 		result = prime * result + ((hasWhatsapp == null) ? 0 : hasWhatsapp.hashCode());
 		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
-		result = prime * result + ((stars == null) ? 0 : stars.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((profissao == null) ? 0 : profissao.hashCode());
@@ -308,6 +324,7 @@ public class Usuario implements UserDetails, Serializable{
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
+		result = prime * result + ((stars == null) ? 0 : stars.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
@@ -371,6 +388,11 @@ public class Usuario implements UserDetails, Serializable{
 				return false;
 		} else if (!facebook.equals(other.facebook))
 			return false;
+		if (foto == null) {
+			if (other.foto != null)
+				return false;
+		} else if (!foto.equals(other.foto))
+			return false;
 		if (hasWhatsapp == null) {
 			if (other.hasWhatsapp != null)
 				return false;
@@ -380,11 +402,6 @@ public class Usuario implements UserDetails, Serializable{
 			if (other.idUsuario != null)
 				return false;
 		} else if (!idUsuario.equals(other.idUsuario))
-			return false;
-		if (stars == null) {
-			if (other.stars != null)
-				return false;
-		} else if (!stars.equals(other.stars))
 			return false;
 		if (login == null) {
 			if (other.login != null)
@@ -425,6 +442,11 @@ public class Usuario implements UserDetails, Serializable{
 			if (other.sobrenome != null)
 				return false;
 		} else if (!sobrenome.equals(other.sobrenome))
+			return false;
+		if (stars == null) {
+			if (other.stars != null)
+				return false;
+		} else if (!stars.equals(other.stars))
 			return false;
 		if (telefone == null) {
 			if (other.telefone != null)

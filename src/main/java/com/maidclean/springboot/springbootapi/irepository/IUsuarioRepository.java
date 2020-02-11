@@ -13,13 +13,15 @@ import com.maidclean.springboot.springbootapi.model.Usuario;
 @org.springframework.stereotype.Repository
 public interface IUsuarioRepository extends Repository<Usuario, Long>, QueryByExampleExecutor<Usuario>{
 		
-	  void save(Usuario pessoa);
+	  void save(Usuario usuario);
 	  		 
 	  void delete(Usuario usuario);
 	 
 	  List<Usuario> findAll();
 	  
 	  Usuario findByIdUsuario(Long idUsuario);
+	  
+	  //void update(Usuario usuario);
 	  
 	  @Query(value="SELECT * FROM tb_usuarios u JOIN tb_avaliacoes av ON (u.id_avaliacao = av.id_avaliacao)",
 				 nativeQuery = true)

@@ -22,8 +22,8 @@ import com.maidclean.springboot.springbootapi.service.MailContentBuilderService;
 public class EmailController {
 
 	
-	  @Autowired 
-	  private JavaMailSender mailSender;
+	 // @Autowired 
+	  //private JavaMailSender mailSender;
 	  
 	  @Autowired
 	  private MailContentBuilderService mailContentBuilder;
@@ -44,7 +44,7 @@ public class EmailController {
 				  messageHelper.setText(contentHTML,true);
 				 //messageHelper.setText("<html><body><button>Clique aqui</button></body></html>",true);
 			  };
-			  mailSender.send(messagePreparator);
+			 // mailSender.send(messagePreparator);
 			  return new Response(1,"Um link para redefinição de senha \n foi encaminhado para o seu email.");	
 			  
 		  }catch(MailException e) {

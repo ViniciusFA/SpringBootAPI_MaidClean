@@ -128,9 +128,7 @@ public class UtilController {
 			
 			return pathFullExtension;
 		}else
-			return "/assets/img/funcionario/photo-here.jpg";
-		
-		
+			return "/assets/img/funcionario/photo-here.jpg";		
 	}
 	
 

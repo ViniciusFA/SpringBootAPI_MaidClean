@@ -4,28 +4,33 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_mensagens")
-public class Mensagens implements Serializable{
+@Table(name = "tb_mensagens")
+public class Mensagens implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_mensagem")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_mensagem")
 	private Long idMensagem;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario_rem")
+	@JoinColumn(name = "id_usuario_rem")
 	private Usuario idUserRem;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_usuario_des")
+	@JoinColumn(name = "id_usuario_des")
 	private Usuario idUserDes;
-	
-	@Column(name="ds_mensagem")
+
+	@Column(name = "ds_mensagem")
 	private String dsMessage;
 
 	public Long getIdMensagem() {
@@ -108,5 +113,5 @@ public class Mensagens implements Serializable{
 		return "Mensagens [idMensagem=" + idMensagem + ", idUserRem=" + idUserRem + ", idUserDes=" + idUserDes
 				+ ", dsMessage=" + dsMessage + "]";
 	}
-	
+
 }
